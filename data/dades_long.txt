@@ -1,0 +1,1134 @@
+NHC	Visita	Visible	Equipo	Equipo2	Equipo3	Seq	R1	R2	obs
+19235	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.09	4
+19235	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.08	4
+19235	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.1	4
+19235	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.11	4
+19235	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.11	4
+19235	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.11	4
+19235	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.07	4
+19235	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.09	4
+19235	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.11	4
+62129	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.06	4
+62129	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	4
+62129	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.06	4
+62129	4	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.11	1.09	4
+62129	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.04	4
+62129	6	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.08	4
+62129	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.14	1.07	4
+62129	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.11	4
+62129	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.07	4
+129540	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.08	1
+129540	2	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.11	1
+129540	3	No	3,0T Trio	3,0T Trio	3,0T Trio	t1se	1.03	1.05	1
+129540	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.07	1
+129540	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.02	1
+129540	6	No	1,5T GE	1,5T GE	Resto	T1SE	0.91	1.19	1
+129540	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	1
+129540	8	No	1,5T Aera	1,5T Aera	Resto	t1se	1.07	1.03	1
+192576	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.05	2
+192576	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.09	2
+192576	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.11	2
+192576	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	2
+192576	5	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	0.99	1.15	2
+192576	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.1	2
+192576	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.14	2
+192576	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.05	2
+327270	1	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.06	1
+327270	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	1
+327270	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.1	1
+327270	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	1
+327270	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.1	1
+327270	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	1
+327270	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.13	1
+327270	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.12	1
+327270	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.1	1
+327270	10	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.2	1
+327270	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.2	1
+520759	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.05	1
+520759	2	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.06	1
+520759	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1	1.1	1
+530464	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.05	4
+530464	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.04	4
+530464	3	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.05	4
+530464	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.04	4
+530464	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.06	4
+530464	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.09	4
+572459	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.1	1
+572459	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.05	1
+572459	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.11	1
+572459	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.07	1
+572459	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.11	1
+683481	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.05	2
+683481	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.04	2
+683481	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.04	2
+683481	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.11	2
+683481	5	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.16	2
+683481	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.06	2
+737501	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	0.99	1.08	1
+737501	2	No	1,5T GE	1,5T GE	Resto	T1SE	0.92	1.09	1
+737501	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.06	1
+737501	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.07	1
+737501	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.05	1
+737501	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.03	1
+737501	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.02	1
+737501	8	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.1	1
+737501	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.12	1.09	1
+737501	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.12	1.11	1
+747872	1	No	Harmony	Harmony+Impact	Resto	T1SE	0.99	1.04	1
+747872	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.07	1
+747872	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.02	1
+747872	4	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.05	1
+747872	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.07	1
+747872	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.07	1
+747872	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.02	1
+747872	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.06	1
+747872	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.06	1
+748790	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.09	2
+748790	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.04	2
+748790	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.05	2
+764809	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	1
+764809	2	No	Impact	Harmony+Impact	Resto	T1SE	1.03	1.08	1
+764809	3	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.08	1
+764809	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+764809	5	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.08	1
+766228	1	No	Impact	Harmony+Impact	Resto	T1SE	1.04	1.05	4
+766228	2	No	1,5T GE	1,5T GE	Resto	T1SE	0.99	1.11	4
+766228	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.04	4
+766228	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	4
+766228	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.01	4
+766228	6	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.09	4
+766228	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.08	4
+766228	8	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.03	4
+4002678	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.15	2
+4002678	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.09	2
+4002678	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.07	2
+4002678	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.09	2
+4002678	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.04	2
+4002678	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.03	2
+4010282	1	No	Impact	Harmony+Impact	Resto	T1SE	1.05	1.07	2
+4010282	2	No	Impact	Harmony+Impact	Resto	T1SE	1.05	1.06	2
+4010282	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	2
+4010282	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.05	2
+4010282	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.11	1.09	2
+4010282	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.03	2
+4010282	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.05	2
+4010282	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.03	2
+4010282	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.12	1.05	2
+4010282	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.04	2
+4040452	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	0.98	1.02	1
+4040452	2	No	1,5T GE	1,5T GE	Resto	T1SE	0.98	1.01	1
+4040452	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.03	1
+4040452	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.04	1
+4041379	1	No	Impact	Harmony+Impact	Resto	T1SE	1	1.11	3
+4041379	2	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.15	1.47	3
+4041379	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.2	1.46	3
+4041379	4	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.17	1.34	3
+4041379	5	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.37	3
+4041379	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.28	3
+4041379	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.35	3
+4041379	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.25	3
+4041379	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.27	3
+4041379	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.26	3
+4048920	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.04	4
+4048920	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.02	4
+4048920	3	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.05	4
+4048920	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.07	4
+4048920	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.08	4
+4048920	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.03	4
+4048920	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	4
+4048920	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.06	4
+4048920	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.08	4
+4051655	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	1
+4051655	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.04	1
+4051655	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	1
+4051655	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.06	1
+4051655	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.06	1
+4051655	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.11	1
+4051655	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.12	1
+4051655	8	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.12	1
+4068402	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.03	3
+4068402	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.05	3
+4068402	3	No	1,5T Symp	1,5T Symp	Resto	T1GRE	1.13	1.06	3
+4068402	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1	3
+4068402	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1	3
+4068402	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.06	3
+4068402	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.1	3
+4068402	8	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.13	3
+4068402	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.14	1.13	3
+4068900	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	4
+4068900	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.07	4
+4068900	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.09	4
+4068900	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.03	4
+4068900	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	4
+4068900	6	 	1,5T Symp	1,5T Symp	Resto	t1se	1.04	1.03	4
+4078647	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.03	2
+4078647	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.08	2
+4078647	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.07	2
+4078647	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	2
+4078647	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.07	2
+4078647	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.06	2
+4078647	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.1	2
+4078647	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.11	1.05	2
+4078647	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.11	2
+4088312	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.07	4
+4088312	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.08	4
+4088312	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.09	4
+4088312	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.11	4
+4088312	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.1	4
+4098877	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.12	3
+4098877	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.05	3
+4098877	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4098877	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.03	3
+4098877	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1	3
+4098877	6	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	3
+4098877	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.05	3
+4098877	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.08	3
+4098877	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.05	3
+4098877	11	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.05	3
+4101400	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.03	3
+4101400	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.02	3
+4101400	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.06	3
+4101400	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.04	3
+4101400	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.04	3
+4101400	6	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.06	3
+4101400	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	3
+4101400	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.12	3
+4101400	9	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	3
+4101400	10	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.09	3
+4106751	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.06	1
+4106751	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	1
+4106751	3	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.09	1
+4106751	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.05	1
+4106751	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.08	1
+4106751	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.12	1.09	1
+4106751	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.09	1
+4106751	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.08	1
+4106751	9	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.14	1.13	1
+4106751	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.11	1
+4106751	11	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.08	1
+4120795	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	1
+4120795	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	1
+4120795	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	1
+4120795	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.06	1
+4120795	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.06	1
+4120795	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.12	1
+4120795	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.07	1
+4120795	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.13	1.18	1
+4120795	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.13	1
+4120795	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.08	1
+4121924	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.06	1
+4121924	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	1
+4121924	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+4121924	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.07	1
+4121924	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.08	1
+4121924	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.1	1
+4121924	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.08	1
+4121924	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.12	1.13	1
+4121924	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.12	1
+4121924	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.14	1.1	1
+4121924	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.27	1
+4121924	12	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.13	1.15	1
+4136858	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.1	1
+4136858	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	1
+4136858	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	1
+4136858	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.08	1
+4136858	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.1	1
+4136858	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.17	1
+4136858	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.2	1
+4136858	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.13	1
+4136858	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.15	1.12	1
+4145329	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1	3
+4145329	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1	3
+4145329	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.03	3
+4145329	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.06	3
+4145329	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.01	3
+4145329	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.01	3
+4145329	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.01	3
+4145329	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.12	3
+4145329	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.08	3
+4145329	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.11	3
+4145494	1	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.08	2
+4145494	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.07	2
+4145494	3	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.06	2
+4145494	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.12	2
+4145494	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.14	1.14	2
+4145494	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.12	2
+4145494	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.04	2
+4145494	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.13	1.07	2
+4145494	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.16	1.07	2
+4155245	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1	3
+4155245	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1	3
+4155245	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.02	3
+4155245	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.04	3
+4155245	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.06	3
+4155245	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	3
+4155245	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.03	3
+4155245	8	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.15	1.09	3
+4155245	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.13	1.09	3
+4156726	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.08	3
+4156726	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.01	3
+4156726	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.06	3
+4156726	4	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.05	3
+4156726	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.06	3
+4156726	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	3
+4159710	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.04	1
+4159710	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	1
+4159710	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.05	1
+4159710	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.05	1
+4159710	5	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	1
+4159710	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.12	1.05	1
+4159710	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.08	1
+4159710	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.12	1.1	1
+4159710	9	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.19	1.12	1
+4159710	10	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.11	1.08	1
+4159710	11	Yes	1,5T Aera	1,5T Aera	Resto	T1GRE	1.14	1.13	1
+4159710	12	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.3	1.14	1
+4160219	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.14	2
+4160219	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.06	2
+4160219	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.13	1.11	2
+4160219	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.11	2
+4161130	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	4
+4161130	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.1	4
+4161130	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.04	4
+4161130	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.08	4
+4161130	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.05	4
+4161130	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.09	4
+4161130	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.02	4
+4163192	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.08	1
+4163192	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.05	1
+4163192	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.06	1
+4163192	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+4163192	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.07	1
+4163192	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	1
+4163192	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.15	1.17	1
+4163192	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.17	1.18	1
+4163192	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.11	1
+4163192	10	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.16	1
+4163192	11	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.11	1
+4167861	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.02	3
+4167861	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1	3
+4167861	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.03	3
+4167861	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.01	3
+4167861	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.05	3
+4180706	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.03	2
+4180706	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	2
+4180706	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.05	2
+4180706	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.15	2
+4180706	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	2
+4180706	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.09	2
+4180706	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.08	2
+4180706	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.06	2
+4180706	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.05	2
+4180706	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.09	2
+4180706	11	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.11	2
+4184632	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.06	4
+4184632	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.11	4
+4184632	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	4
+4184632	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.08	4
+4184632	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.01	4
+4184632	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.07	4
+4184632	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	4
+4184632	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	4
+4184632	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.06	4
+4184632	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	4
+4184632	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.12	4
+4194359	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.04	1
+4194359	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.05	1
+4194359	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.04	1
+4194359	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.11	1.08	1
+4194359	5	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.1	1.09	1
+4194893	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.11	1
+4194893	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.15	1
+4194893	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.09	1
+4194893	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.17	1
+4194893	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	1
+4201826	1	No	1,5T GE	1,5T GE	Resto	T1SE	0.96	1.13	2
+4201826	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.06	2
+4201826	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.09	2
+4201826	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.12	2
+4201826	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.06	2
+4201826	6	 	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.1	2
+4201826	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.12	2
+4201826	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.13	2
+4201826	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.06	2
+4201826	10	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.13	2
+4205281	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.1	4
+4205281	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.06	4
+4205281	3	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.05	4
+4205281	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.11	4
+4205281	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.17	1.15	4
+4205281	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	4
+4205281	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.09	1.11	4
+4205281	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.14	1.13	4
+4205281	9	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.14	1.07	4
+4205281	10	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.13	4
+4219061	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.05	3
+4219061	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.03	3
+4219061	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.04	3
+4219061	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.09	3
+4219061	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.11	3
+4219061	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.12	3
+4219061	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.08	3
+4219061	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.05	3
+4219061	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	3
+4219061	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.03	3
+4236770	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4236770	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.04	3
+4236770	3	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.1	3
+4236770	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.05	3
+4236770	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.15	1.11	3
+4236770	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.09	3
+4236770	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.05	3
+4236770	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.03	3
+4239033	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.03	4
+4239033	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	4
+4239033	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.06	4
+4239033	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.07	4
+4239033	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.1	4
+4239578	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.11	1
+4239578	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.08	1
+4239578	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.06	1
+4239578	4	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.16	1
+4239578	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.07	1
+4239578	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.08	1
+4239578	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.15	1.15	1
+4239578	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.09	1
+4239578	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.11	1
+4239578	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.08	1
+4239578	11	Yes	1,5T Aera	1,5T Aera	Resto	t1se	1.1	1.11	1
+4242190	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.06	1
+4242190	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.09	1
+4242190	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.03	1
+4242190	4	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.17	1.14	1
+4242190	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.18	1.12	1
+4242190	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.16	1.14	1
+4242190	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.08	1
+4242190	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.1	1
+4242190	9	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.14	1
+4243342	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.04	4
+4243342	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	4
+4243342	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.09	4
+4243342	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.03	4
+4243342	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.06	4
+4243342	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	4
+4244779	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.08	3
+4244779	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	3
+4244779	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1	3
+4244779	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	3
+4244779	5	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.09	1.09	3
+4245001	1	No	1,5T Symp	1,5T Symp	Resto	T1GRE	1.13	1.17	3
+4245001	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.05	3
+4245001	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.01	3
+4245001	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4245001	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.04	3
+4245001	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.04	3
+4245001	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.09	3
+4245001	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	3
+4253404	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	2
+4253404	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.04	2
+4253404	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	2
+4253404	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.16	1.14	2
+4253404	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.08	2
+4253404	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	2
+4253404	7	 	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.09	2
+4253404	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.18	2
+4253404	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.14	2
+4253404	10	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.11	2
+4270815	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.03	3
+4270815	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.01	3
+4270815	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.01	3
+4270815	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.08	3
+4270815	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.01	3
+4270815	6	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.02	1.02	3
+4270815	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.11	1	3
+4270815	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.07	3
+4270815	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.04	3
+4270815	10	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.01	3
+4270938	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.08	3
+4270938	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.1	3
+4270938	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.1	3
+4270938	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	3
+4270938	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.12	3
+4271122	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.03	3
+4271122	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.01	3
+4271122	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.03	3
+4271122	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.1	3
+4271122	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.04	3
+4271122	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.05	3
+4271122	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.07	3
+4271122	8	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.13	3
+4271122	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.15	3
+4271616	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	0.99	1.04	1
+4271616	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.01	1
+4271616	3	No	1,5T GE	1,5T GE	Resto	T1SE	0.99	1.12	1
+4271616	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.08	1
+4271616	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	1
+4271616	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.15	1
+4271616	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.08	1
+4271616	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.11	1
+4271616	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.08	1
+4282492	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.07	2
+4282492	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.99	1.12	2
+4282492	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	0.96	1.09	2
+4282492	4	No	1,5T GE	1,5T GE	Resto	T1SE	0.92	1.15	2
+4288092	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.02	3
+4288092	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.02	3
+4288092	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.03	3
+4288092	4	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.03	3
+4288092	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1	3
+4288092	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.04	3
+4298053	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.03	3
+4298053	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.02	3
+4298053	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.03	3
+4298053	4	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.06	3
+4298053	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.01	3
+4298053	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.05	3
+4298958	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.06	1
+4298958	2	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.1	1
+4298958	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.04	1
+4298958	4	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.13	1
+4298958	5	No	1,5T GE	1,5T GE	Resto	T1SE	0.9	0.83	1
+4298958	6	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.11	1
+4298958	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	1
+4298958	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.06	1
+4298958	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.11	1
+4298958	10	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.16	1
+4299202	1	Yes	Harmony	Harmony+Impact	Resto	T1SE	1	1.04	1
+4299202	2	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.15	1
+4299202	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.06	1
+4299202	4	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.1	1
+4299202	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	0.72	1.12	1
+4299202	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.09	1
+4299202	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.06	1
+4299202	8	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.09	1
+4299202	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.1	1
+4305504	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.09	4
+4305504	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.08	4
+4305504	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.03	4
+4305504	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.1	4
+4305504	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	4
+4305504	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.04	4
+4305504	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.1	4
+4305504	8	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.05	1.11	4
+4305504	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.09	4
+4305504	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.11	4
+4305504	11	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.08	4
+4307785	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.08	1
+4307785	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.1	1
+4307785	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.11	1
+4307785	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.09	1
+4307785	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	1
+4307785	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.12	1.13	1
+4307785	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	1
+4307785	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.1	1
+4307785	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.1	1
+4307785	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.14	1
+4309873	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.04	4
+4309873	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.08	4
+4309873	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.04	4
+4309873	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.1	1.08	4
+4309873	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.1	4
+4309873	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	4
+4309873	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.11	1.09	4
+4309873	8	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.07	4
+4309873	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.11	1.12	4
+4309873	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.07	4
+4317150	1	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.1	1
+4317150	2	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.06	1
+4317150	3	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.13	1
+4317150	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	1
+4317150	5	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.07	1
+4317150	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.09	1
+4317150	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.08	1
+4317150	8	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.07	1
+4317150	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.12	1
+4329243	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	1
+4329243	2	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.06	1
+4329243	3	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.12	1
+4329243	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+4329243	5	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.09	1
+4329243	6	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.07	1
+4329243	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.06	1
+4329243	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.1	1
+4329243	9	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.07	1
+4329243	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.12	1.11	1
+4329243	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.12	1
+4329243	12	Yes	1,5T Aera	1,5T Aera	Resto	t1se	1.11	1.12	1
+4350191	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4350191	2	No	 	 	 	T1SE	1.02	1.04	3
+4350191	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.03	3
+4350191	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	3
+4350191	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.02	3
+4350191	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.01	3
+4350191	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.02	3
+4350191	8	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.13	1.07	3
+4350191	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.15	1.07	3
+4356741	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.05	3
+4356741	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.06	3
+4356741	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.07	3
+4356741	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.04	3
+4356741	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.06	3
+4356741	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.02	3
+4356741	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.07	3
+4356741	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.11	3
+4369553	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1	1.09	3
+4369553	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.03	3
+4369553	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.04	3
+4369553	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.15	3
+4369553	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	3
+4369553	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.04	3
+4369553	7	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.03	3
+4369553	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.04	3
+4369553	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.04	3
+4369553	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.11	1.06	3
+4369553	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.11	3
+4369827	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.06	4
+4369827	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.08	4
+4369827	3	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.06	4
+4369827	4	 	Harmony	Harmony+Impact	Resto	 	 	 	4
+4371743	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	1
+4371743	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.06	1
+4371743	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.06	1
+4371743	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.05	1
+4371743	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.08	1
+4371743	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.11	1.08	1
+4371743	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.08	1
+4371743	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.08	1
+4371743	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.09	1
+4377113	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.06	4
+4377113	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.09	4
+4377113	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	4
+4377113	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.04	4
+4377113	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.08	4
+4377113	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.04	4
+4377113	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.06	4
+4382295	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.12	1.1	2
+4382295	2	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.16	2
+4382295	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.07	2
+4382295	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.07	2
+4382295	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.07	2
+4382295	6	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.14	2
+4382295	7	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.18	2
+4382295	8	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.14	2
+4382295	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.09	2
+4386097	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.06	3
+4386097	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.01	3
+4386097	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.03	3
+4386097	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.06	3
+4386097	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1	3
+4386097	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.04	3
+4386097	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.06	3
+4386097	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.01	3
+4386266	1	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.04	2
+4386266	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.11	2
+4386266	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.1	2
+4386266	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.08	2
+4406510	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.11	2
+4406510	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.08	2
+4406510	3	 	Harmony	Harmony+Impact	Resto	 	 	 	2
+4406510	4	 	Harmony	Harmony+Impact	Resto	 	 	 	2
+4406510	5	 	Harmony	Harmony+Impact	Resto	 	 	 	2
+4406510	6	No	1,5T GE	1,5T GE	Resto	T1SE	0.96	1.15	2
+4406510	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.07	2
+4406510	8	No	1,5T GE	1,5T GE	Resto	T1SE	0.97	1.12	2
+4406510	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.06	2
+4412803	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.06	2
+4412803	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.06	2
+4412803	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.09	1.04	2
+4412803	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.12	1.07	2
+4412803	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.05	2
+4412803	6	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.05	2
+4412803	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.15	2
+4412803	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.11	2
+4412803	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.11	1.14	2
+4412803	10	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.1	2
+4412803	11	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.14	1.07	2
+4415159	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.04	3
+4415159	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.06	3
+4415159	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.1	3
+4415159	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.05	3
+4415159	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.05	3
+4415159	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	3
+4415159	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.02	3
+4415159	8	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.05	3
+4434084	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.02	2
+4434084	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.05	2
+4434084	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.07	2
+4434084	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.09	2
+4434084	5	 	Harmony	Harmony+Impact	Resto	T1SE	0.94	1.05	2
+4434084	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.05	2
+4434084	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.98	1.08	2
+4434084	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.1	2
+4434084	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.08	2
+4434084	10	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.06	2
+4434084	11	No	1,5T GE	1,5T GE	Resto	T1SE	0.99	1.1	2
+4435203	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.06	3
+4435203	2	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.06	3
+4435203	3	No	Harmony	Harmony+Impact	Resto	T1SE	1	1	3
+4435203	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.01	3
+4435203	5	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.02	3
+4435203	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.08	3
+4435203	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.05	3
+4435203	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.09	3
+4435203	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.05	3
+4435203	10	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.13	3
+4435203	11	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.09	3
+4436267	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.1	3
+4436267	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.12	3
+4436267	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.06	3
+4436267	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.07	3
+4436267	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	3
+4436267	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.15	1.1	3
+4436916	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.04	4
+4436916	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.03	4
+4436916	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.04	4
+4436916	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	4
+4436916	5	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.07	4
+4436916	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.05	4
+4436916	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.05	4
+4436916	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.06	4
+4436916	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.05	4
+4436916	10	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.03	4
+4442715	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.11	4
+4442715	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.08	4
+4442715	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.07	4
+4442715	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.09	4
+4442715	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.12	4
+4442715	6	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.1	4
+4442715	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.13	4
+4442715	8	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.11	4
+4442715	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.09	4
+4445766	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	3
+4445766	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.01	3
+4445766	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.05	3
+4445766	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1	3
+4445766	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.02	3
+4445766	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.06	3
+4445766	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.05	1.06	3
+4445766	8	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	3
+4445766	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.13	3
+4445766	10	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.08	3
+4450112	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.06	3
+4450112	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.06	3
+4450112	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	3
+4450112	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4450112	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.02	3
+4450112	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.05	3
+4450611	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.14	1.1	3
+4450611	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1	3
+4450611	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.05	3
+4450611	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	3
+4450611	5	No	1,5T GE	1,5T GE	Resto	t1se	1.01	1.06	3
+4473751	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.05	1
+4473751	2	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.04	1
+4473751	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.04	1
+4473751	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.1	1.05	1
+4473751	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.09	1
+4473751	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.06	1
+4473751	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.08	1
+4487584	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.07	2
+4487584	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.14	1.01	2
+4487584	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	2
+4487584	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.04	2
+4487584	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.1	2
+4487584	6	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.1	2
+4499690	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.04	1
+4499690	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.11	1
+4499690	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.06	1
+4499690	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.08	1.05	1
+4499690	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.1	1
+4499690	6	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.19	1.12	1
+4499690	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.08	1.11	1
+4499690	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.11	1
+4499690	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.1	1
+4499690	10	Yes	1,5T Symp	1,5T Symp	Resto	T1GRE	1.16	1.08	1
+4499690	11	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.1	1
+4499690	12	 	1,5T GE	1,5T GE	Resto	artefactuado	 	 	1
+4503508	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.04	4
+4503508	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	4
+4503508	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.1	4
+4503508	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	4
+4503508	5	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.05	1.05	4
+4503508	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.09	4
+4503508	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.08	4
+4503782	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.1	2
+4503782	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.06	2
+4503782	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1	2
+4503782	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.11	2
+4503782	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.07	2
+4503782	6	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.11	1.12	2
+4503782	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.96	1.08	2
+4503782	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.06	2
+4503782	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.11	2
+4506953	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.01	3
+4506953	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1	3
+4506953	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1.01	3
+4506953	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.01	3
+4506953	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.05	3
+4506953	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.08	3
+4506953	7	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.1	1.14	3
+4506953	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.03	3
+4506953	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.06	3
+4506953	10	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.04	3
+4513563	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.1	2
+4513563	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.04	2
+4513563	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	2
+4513563	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.05	1.09	2
+4532601	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.06	4
+4532601	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.06	4
+4532601	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.02	4
+4532601	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.02	4
+4532601	5	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.08	4
+4537429	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.05	4
+4537429	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.05	4
+4537429	3	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.08	4
+4537429	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.07	4
+4537429	5	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.07	4
+4537429	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.02	4
+4537429	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.06	4
+4537429	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.06	4
+4537429	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	4
+4537429	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.03	4
+4554088	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.08	2
+4554088	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.1	2
+4554088	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.1	2
+4554088	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.16	1.11	2
+4554088	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.1	2
+4566961	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1	3
+4566961	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.05	3
+4566961	3	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.02	3
+4566961	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.08	3
+4566961	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.01	3
+4566961	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.02	3
+4566961	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.01	3
+4566961	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1	3
+4566961	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.07	3
+4567338	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.01	3
+4567338	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.05	3
+4567338	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.01	3
+4567338	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.08	3
+4567338	5	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.08	3
+4567338	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.08	3
+4567338	7	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.06	3
+4567338	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	3
+4567338	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1	3
+4569473	1	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.13	2
+4569473	2	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.12	2
+4569473	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	0.88	2
+4569473	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.99	0.86	2
+4569473	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.16	2
+4569473	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.21	2
+4569473	7	No	1,5T Aera	1,5T Aera	Resto	t1se	0.99	1.2	2
+4569473	8	No	1,5T Symp	1,5T Symp	Resto	t1se	1.06	1.2	2
+4569473	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.11	2
+4569473	10	No	1,5T Symp	1,5T Symp	Resto	t1se	1.1	1.11	2
+4569473	11	 	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.12	2
+4573685	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	2
+4573685	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.08	2
+4573685	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.03	2
+4573685	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.1	2
+4573685	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.14	1.07	2
+4573685	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.13	1.07	2
+4573685	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.14	1.07	2
+4573685	8	 	1,5T Aera	1,5T Aera	Resto	T1SE	 	 	2
+4581170	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.09	4
+4581170	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.06	4
+4581170	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.11	4
+4581170	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.07	4
+4581170	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.08	4
+4581170	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.05	4
+4581170	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.04	4
+4581170	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.03	4
+4581170	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.03	4
+4581170	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.02	4
+4610422	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.01	4
+4610422	2	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.03	4
+4610422	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.03	4
+4610422	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.04	4
+4610422	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.03	4
+4610422	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1	4
+4610422	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1	4
+4610422	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1	4
+4610422	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1	4
+4617590	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.06	3
+4617590	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.02	3
+4617590	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.05	3
+4617590	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.05	3
+4617590	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.03	3
+4617590	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.03	3
+4617590	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.06	3
+4617590	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1	3
+4617590	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.01	3
+4617590	10	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.07	3
+4624481	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.13	2
+4624481	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.99	1.02	2
+4624481	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.13	2
+4624481	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.03	2
+4624481	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.04	2
+4626462	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	0.99	1.05	1
+4626462	2	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.06	1
+4626462	3	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	1
+4626462	4	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	1
+4626462	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.1	1
+4626462	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	1
+4626462	7	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.07	1
+4626462	8	No	1,5T Symp	1,5T Symp	Resto	t1se	1.07	1.06	1
+4629151	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	1
+4629151	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.1	1.11	1
+4629151	3	Yes	1,5T Aera	1,5T Aera	Resto	T1GRE	1.11	1.08	1
+4629151	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.09	1.06	1
+4629151	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.09	1
+4629151	6	No	1,5T Symp	1,5T Symp	Resto	T1GRE	1.06	1.1	1
+4629151	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.1	1
+4629151	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.1	1
+4629151	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.07	1
+4629151	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.1	1
+4632039	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.01	3
+4632039	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.02	3
+4632039	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.09	3
+4632039	4	No	1,5T GE	1,5T GE	Resto	T1SE	0.9	1.05	3
+4632039	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.01	3
+4632039	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.03	3
+4632039	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	3
+4632039	8	No	1,5T Symp	1,5T Symp	Resto	t1se	1.07	1	3
+4636641	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.12	2
+4636641	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.13	2
+4636641	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.16	2
+4636641	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.08	2
+4636641	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.09	2
+4636641	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.08	2
+4637451	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.06	2
+4637451	2	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.09	2
+4637451	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.03	2
+4637451	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.05	2
+4637451	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.04	2
+4637451	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.02	2
+4637451	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.09	1.04	2
+4637451	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.04	2
+4637451	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.07	2
+4641956	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	2
+4641956	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.15	2
+4641956	3	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	0.99	1.14	2
+4641956	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.17	2
+4641956	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.18	2
+4641956	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.08	2
+4641956	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.09	2
+4657706	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.11	1
+4657706	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.16	1
+4657706	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.06	1
+4657706	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.15	1
+4657706	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.11	1
+4657706	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.11	1
+4657706	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.1	1
+4657706	8	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.13	1
+4657706	9	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.16	1
+4657706	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.12	1
+4657715	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.05	3
+4657715	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1	3
+4657715	3	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.04	3
+4657715	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1	3
+4657715	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.01	3
+4657715	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.02	3
+4657715	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1	3
+4657715	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1	3
+4657715	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1	3
+4657715	10	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.02	3
+4662794	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.07	4
+4662794	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	4
+4662794	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.12	4
+4662794	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.1	4
+4662794	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.09	4
+4662794	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.11	4
+4662794	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.07	4
+4662794	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.05	4
+4662794	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.06	4
+4665606	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.07	1.07	1
+4665606	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.11	1
+4665606	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.1	1
+4665606	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.08	1
+4665606	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.07	1
+4665606	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.06	1
+4665606	7	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.12	1
+4665606	8	No	1,5T Aera	1,5T Aera	Resto	t1se	1.01	1.11	1
+4678202	1	No	1,5T GE	1,5T GE	Resto	T1SE	0.95	1.08	1
+4678202	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.98	1.11	1
+4678202	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.1	1
+4678202	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	0.99	1.05	1
+4678202	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.06	1
+4678202	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.06	1
+4678202	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.11	1
+4678202	8	No	1,5T GE	1,5T GE	Resto	T1SE	0.99	1.08	1
+4678202	9	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.07	1.08	1
+4687348	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.09	2
+4687348	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	2
+4687348	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.05	2
+4687348	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.07	1.07	2
+4687348	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.07	2
+4687348	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.12	1.08	2
+4687348	7	 	1,5T GE	1,5T GE	Resto	t1se	1.01	1.08	2
+4687348	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.07	2
+4687348	9	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.04	1.07	2
+4696791	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1	1.03	1
+4696791	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.98	0.96	1
+4696791	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.05	1
+4696791	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	1
+4696791	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.99	1.06	1
+4696791	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.97	1.04	1
+4696791	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	0.99	1.05	1
+4696791	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.05	1
+4704382	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	 	1.11	2
+4704382	2	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.14	1.03	2
+4704382	3	 	1,5T Aera	1,5T Aera	Resto	 	 	 	2
+4704382	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.03	2
+4704382	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.04	2
+4704382	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.12	1.04	2
+4727770	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.07	2
+4727770	2	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1	1.05	2
+4727770	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.04	2
+4727770	4	No	1,5T GE	1,5T GE	Resto	T1SE	0.95	1.1	2
+4728870	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.06	1
+4728870	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.05	1
+4728870	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.06	1
+4728870	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1	1
+4728870	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.06	1
+4728870	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	0.98	1.05	1
+4728870	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.05	1
+4728870	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.07	1
+4728870	9	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.08	1
+4728870	10	No	1,5T GE	1,5T GE	Resto	T1SE	0.99	1.08	1
+4732272	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.12	2
+4732272	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.11	2
+4732272	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.06	1.14	2
+4732272	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.11	2
+4732272	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.12	2
+4732272	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.12	2
+4732272	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.11	2
+4732272	8	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.1	1.13	2
+4732272	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.13	2
+4732390	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.02	3
+4732390	2	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.01	3
+4732390	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.03	3
+4732390	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.04	3
+4732390	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.01	3
+4732390	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.07	3
+4732390	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.03	3
+4743996	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1	3
+4743996	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	3
+4743996	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.01	3
+4743996	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.05	1.01	3
+4743996	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1	3
+4743996	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.03	3
+4743996	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1	3
+4743996	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.03	3
+4744235	1	No	1,5T GE	1,5T GE	Resto	T1SE	0.96	1.12	2
+4744235	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.01	1.01	2
+4744235	3	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.1	2
+4744235	4	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.01	1.07	2
+4744235	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.02	2
+4744235	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.05	2
+4744235	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.05	2
+4744235	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.09	1.08	2
+4750345	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.03	1.04	3
+4750345	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.08	3
+4750345	3	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.05	1.04	3
+4750345	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.05	3
+4750345	5	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.06	3
+4750345	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.06	3
+4750345	7	 	hipofisis… no valido	hipofisis… no valido	Resto	 	 	 	3
+4750345	8	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.07	3
+4750345	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.05	3
+70064848	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.03	2
+70064848	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.05	2
+70064848	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.05	2
+70064848	4	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.06	1.08	2
+70064848	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.04	2
+70064848	6	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.11	2
+70064848	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.07	2
+70064848	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.03	1.11	2
+70113332	1	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.02	3
+70113332	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.01	1	3
+70113332	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.02	3
+70113332	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.02	3
+70113332	5	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.03	3
+70113332	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.06	3
+70113332	7	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.03	3
+70113332	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.08	1.05	3
+70113332	9	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.05	3
+70170387	1	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.11	1.06	1
+70170387	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1	1
+70170387	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.02	1
+70170387	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.02	1.08	1
+70189500	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.01	4
+70189500	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.05	4
+70189500	3	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1.04	4
+70189500	4	No	1,5T GE	1,5T GE	Resto	T1SE	1.01	1.08	4
+70189500	5	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.05	4
+70189500	6	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	4
+70189500	7	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.02	1.06	4
+70189500	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.05	4
+70189500	9	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.02	1.06	4
+70189500	10	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.02	1.05	4
+70252905	1	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.05	1
+70252905	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.04	1
+70252905	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	0.96	1.01	1
+70252905	4	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.04	1
+70252905	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	1
+70252905	6	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+70252905	7	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.07	1
+70252905	8	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.07	1
+70327432	1	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.01	1	3
+70327432	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.05	3
+70327432	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.01	3
+70327432	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.04	3
+70327432	5	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.04	1.04	3
+70327432	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1	1.02	3
+70327432	7	No	1,5T Aera	1,5T Aera	Resto	T1SE	1	1.02	3
+70327432	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.02	3
+70327432	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.01	3
+70327432	10	No	1,5T Sympno	1,5T Sympno	Resto	T1SE	1	1.01	3
+70445126	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.07	2
+70445126	2	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.13	2
+70445126	3	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.09	1.12	2
+70445126	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.1	1.05	2
+70445126	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.05	2
+70445126	6	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.08	2
+70445126	7	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.08	2
+70445126	8	No	Harmony	Harmony+Impact	Resto	T1SE	1.04	1.11	2
+70445126	9	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.1	1.04	2
+70449677	1	No	Impact	Harmony+Impact	Resto	T1SE	1.05	1.06	1
+70449677	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.06	1
+70449677	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.06	1
+70449677	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.07	1.08	1
+70449677	5	No	1,5T GE	1,5T GE	Resto	T1GRE	1.08	1.1	1
+70449677	6	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.14	1.1	1
+70449677	7	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.14	1.07	1
+70449677	8	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.15	1.11	1
+70449677	9	Yes	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.1	1
+70449677	10	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.05	1
+70449677	11	Yes	1,5T GE	1,5T GE	Resto	T1SE	1.13	1.13	1
+70512007	1	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.09	1
+70512007	2	No	Impact	Harmony+Impact	Resto	T1SE	1.02	1.07	1
+70512007	3	No	1,5T GE	1,5T GE	Resto	T1SE	1	1.12	1
+70512007	4	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.1	1
+70512007	5	No	Harmony	Harmony+Impact	Resto	T1SE	1.03	1.1	1
+70512007	6	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.13	1.1	1
+70527596	1	No	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.04	1.05	4
+70527596	2	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.06	1.02	4
+70527596	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.06	4
+70527596	4	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.03	1.07	4
+70527596	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.09	1.07	4
+70527596	6	No	1,5T GE	1,5T GE	Resto	T1SE	1.08	1.08	4
+70527596	7	No	1,5T GE	1,5T GE	Resto	T1SE	1.05	1.11	4
+70527596	8	No	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.05	4
+70527596	9	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.08	1.08	4
+70527596	10	Yes	3,0T Trio	3,0T Trio	3,0T Trio	T1SE	1.09	1.12	4
+70527596	11	Yes	1,5T Aera	1,5T Aera	Resto	T1SE	1.06	1.11	4
+70585490	1	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.03	1.06	2
+70585490	2	No	Harmony	Harmony+Impact	Resto	T1SE	1	1.07	2
+70585490	3	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.02	1.05	2
+70585490	4	No	Harmony	Harmony+Impact	Resto	T1SE	1.05	1.09	2
+70585490	5	No	1,5T Symp	1,5T Symp	Resto	T1SE	1.05	1.07	2
+80062001	1	No	1,5T GE	1,5T GE	Resto	T1SE	1.04	1.05	2
+80062001	2	No	Harmony	Harmony+Impact	Resto	T1SE	1.02	1.08	2
+80062001	3	No	Harmony	Harmony+Impact	Resto	T1SE	1.06	1.1	2
+80062001	4	Yes	Harmony	Harmony+Impact	Resto	T1SE	1.07	1.06	2
