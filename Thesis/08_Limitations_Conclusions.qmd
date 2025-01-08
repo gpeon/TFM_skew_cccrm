@@ -1,0 +1,23 @@
+# Limitations & Conclusions
+
+## Limitations
+
+While the simulation sets reviewed represented a thorough analysis on the nominal coverage of the current estimation approaches for the Concordance Correlation Coefficient, which were complimented with the inclusion of two case studies, there were many relevant situations still pending to be tested. The analysis therefore could be expanded by selecting a different number of subjects, raters, and observation times, simulating with alternative weights for the variance components and other levels of skewness. With regards of the model structure, the reviewed CCC approaches could be compared with others that assume the fixed effects to be random, or that the skewness present in the longitudinal response is not only produced by the subjects-effect but also by the subject-time or subject-method interactions. Known approaches, such as skewnormal-normal models and generalized estimating equations, have yet to be extended for the repeated measures CCC, but have shown properties relevant to address moderate skewness.
+
+The simulations were limited to longitudinal designs without missingness, but as seen in the second case study, the introduction of a drop-out pattern could hamper some of the available methods, and the impact of popular imputation techniques with regards to concordance has yet to be studied. Also, possible misspecification is not limited to the skewness produced by a log-normal effect, and the effect of under and overspecification on the underlying model was not reviewed in the present simulation sets.
+
+## Conclusions
+
+The variance component approach is currently one of the most well developed and extensive approaches in order to assess the concordance between multiple raters in a repeated measures context, with particular emphasis in longitudinal outcomes. Most approaches reviewed were or have been included in the R package `cccrm`. 
+
+The application of transformations in the context of the presented simulation sets and the case studies do not seem to provide any sizable improvement over the default asymptotic approach. Both the empirical bootstrap and U-statistics methods generally failed to achieve its nominal coverage, while both the BCa bootstrap and the bayesian implementation based on the normal-normal model showed reasonable improvements in coverage, even if point estimate bias remained comparable. Another key insight is that the relevant misspecification is not the strength of skewness of the random effect itself, but of the response variable, which when it presents a strong skewness all tested methods fail to reach its nominal coverage. For the simulated right skewness better coverage was seen for high concordance values.
+
+In the first case study it was observed that the application of the log-transformation on the response variable may not be an appropriate technique when the objective is to assess concordance, as most concordance estimates on the log-transformed response were greater than the estimated correlation, with the correlation being a natural upper bound for the CCC. Then, the second case study reflects that for the longitudinal assessment of concordance the selection of the cut-off points and covariates are meaningful choices, and when a drop-out mechanism is present and it is not at MNAR pattern, methods that model on available cases should be preferred.
+
+# Acknowledgements {.unnumbered}
+
+This thesis was developed during an Erasmus stay in the Katholieke Universiteit Leuven, were professors Sophie Van Belle (University of Maastricht) and Emmanuel Lessafre (KU Leuven) acted as co-advisors, monitored the project, and provided key inputs for which I'm deeply grateful. I'm also very thankful for the support and time committed by professor Josep Lluís Carrasco in support of the project as the thesis director, from its proposal and through its revisions.
+
+# Supplementary material {.unnumbered}
+
+Both functions that have been implemented and used for the project have been made available in the following repository. The saved simulation results and the rest of the project code are also available.

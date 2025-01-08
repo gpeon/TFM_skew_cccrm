@@ -1,0 +1,15 @@
+model {
+        for(i in 1:N){
+            reading[i] ~ dnorm(m[i], taueps)
+            m[i] <- inprod(beta[], X[i,])+inprod(b[], Z[i,])
+        }
+        for(k in 1:K){
+            b[k] ~ dlnorm(mub, taub)
+        }
+        for(j in 1:P){
+            beta[j] ~ dnorm(0, 1.0E-6)
+        }
+        taueps ~ dgamma(1.0E-3, 1.0E-3)
+        mub ~ dnorm(0, 1.0E-6)
+        taub ~ dgamma(1.0E-3, 1.0E-3) 
+     }

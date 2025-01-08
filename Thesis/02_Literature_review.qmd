@@ -1,0 +1,61 @@
+# The Concordance correlation coefficient
+
+The Concordance Correlation Coefficient was initially proposed in @lin1989 for the measure of the degree of concordance between two random variables, $Y_1$ and $Y_2$, that follow a normal bivariate distribution^[$\begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix} \sim MN \begin{pmatrix} \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{12} & \sigma_2^2 \end{pmatrix} \end{pmatrix}$]. The index was defined as a scaled (in order to be bounded between 1 and -1) and inverted (1 minus the value) version of the expected value of the squared difference ($E[(Y_1-Y_2)^2]$), which then could be expressed as the product of the Pearson correlation coefficient $\rho$ (as a measure of precision) and the bias correction factor $C_b$ that captures both the scale and location shifts from the 45 degree line (complete concordance).
+
+$$CCC= \rho C_b=1-\frac{E[(Y_1-Y_2)^2]}{\sigma_1^2 + \sigma_2^2 + (\mu_1-\mu_2)^2} = \frac{2 \sigma_{12}}{\sigma_1^2 + \sigma_2^2 + (\mu_1-\mu_2)^2}$$
+
+Lin also develops an asymptotic estimate of the variance of the sample Concordance Correlation Coefficient given the consistency of the estimator, which was tested under the uniform and Poisson distributions, and the asymptotical normality of its distribution (it is shown that this estimate can be improved using Fisher's Z transformation). Finally, it also delivers the first proposal for the generalized version of the coefficient for more than two readers.[^02_literature_review-1]
+
+[^02_literature_review-1]: Both the generalized coefficient and the estimate for the variance of the coefficient would be further corrected in @lin2000.
+
+The extension of the coefficient for multiple observers was later fully developed in @king2001 where the Generalized Concordance Coefficient was proposed and an U-statistic estimate of the coefficient was introduced and reviewed; also as the Overall Concordance Correlation Coefficient in @barnhart2002 with a Generalized Estimating Equations given, and also a third approach (which was also an expression of the GCCC) was proposed in @carrasco2003 through the variance components methods, which was later extended for longitudinal data and for repeated measures in @king2007 and in @carrasco2009.
+
+$$OCCC = \frac{2\sum_{j=1}^{J-1} \sum_{k=j+1}^J \sigma_{jk}}{(J-1)\sum_{j=1}^J\sigma_j^2 + \sum_{j=1}^{J-1} \sum_{k=j+1}^J (\mu_j-\mu_k)^2}$$
+
+With $\mu_j$ and $\sigma_j^2$ referring to the mean and variance of the $j$th individual, and $\sigma_{jk}$ the covariance between individuals $j$ and $k$.
+
+## The robust U-statistics estimate
+
+In contrast to the Overall CCC, which was developed and defined as a weighted average of the pairwise CCC, focusing on extending the coefficient for multiple observers, the  focus of the Generalized CCC when it was first proposed in @king2001a, was to extend the coefficient for the cases where the squared distance function ($(Y_1-Y_2)^2$) might not have been appropriate, which is the case under non-normality, to a whole family of convex continuous distance functions ($g(Y_1-Y_2)$), with some Winsored versions and Huber's function showing greater robustness. For the comparison of two methods, the GCCC formula is the following:
+
+$$CCC = \frac{[E_{F_{Y_1} F_{Y_2}}g(Y_1-Y_2)-E_{F_{Y_1} F_{Y_2}}g(Y_1+Y_2)]-[E_{F_{Y_1Y_2}}g(Y_1-Y_2)-E_{F_{Y_1Y_2}}g(Y_1+Y_2)]}{E_{F_{Y_1} F_{Y_2}}g(Y_1-Y_2)-E_{F_{Y_1} F_{Y_2}}g(Y_1+Y_2) + \frac{1}{2}(E_{F_{Y_1}}g(2{Y_1})+E_{F_{Y_2}}g(2Y_2))}$$
+
+Which could be reduced to the following form for estimation by replacing the terms with the U-statistics which they showed to be unbiased estimators for the previous terms for a sample size of size $n$:
+
+$$\hat{CCC} = \frac{(n-1)(U_3-U_1)}{U_1 + nU_2 + (n-1)U_3}$$
+
+Then, in @king2001, the authors extended the coefficient to the multiple raters case by replacing the $U_1$, $U_2$ and $U_3$ by their sum across all the unique pairs $U_{1S}$, $U_{2S}$ and $U_{3S}$, given the U-statistics property that the sum of the U-statistics is in itself a U-statistic, and proved that the multi-rater version of the coefficient still was asymptotically normal.
+
+$$\hat{CCC} = \frac{(n-1)(U_{3S}-U_{1S})}{U_{1S} + nU_{2S} + (n-1)U_{3S}}$$
+
+It was finally extended to the repeated measures case, with particular attention for longitudinal data, in @king2007, where $nU$ was the unbiased estimator of the expected value of the weighted squared differences $E[(X-Y)'D(X-Y)]$ and $U+(n-1)V$ the unbiased estimator of the previous expected value under independence.
+
+$$\hat{CCC} = \frac{(n-1)(V-U)}{U + (n-1)V}$$
+
+## The Variance Components Approach
+
+In this thesis the Concordance Correlation Coefficient expression which is mainly discussed is the one proposed in Carrasco (2003), estimated through the variance components. It suggests a linear mixed measurement model where the continuous variable is measured a total of $m$ times (the product between the $n$ number of subjects, $k$ number of raters, and $l$ number of replicates), which requires that every possible combination of raters and times to be accounted. Also, the explanation has been limited to a specific type of block diagonal, with the condition of identity, for the variance-covariance matrix of the random effects of the underlying LMM. The proposed model was the following: $Y_{ijl} = \mu + \alpha_i + \beta_j + \epsilon_{ijl}$, with $i=1,...,n$ subjects, $j = 1,...,k$ raters and $l=1,...,r$ replicates; where $\mu$, the overall mean, and $\beta_j$, the rater $j$ effect, are the fixed effects; and $\alpha_i \sim N(0,\sigma_{\alpha}^2)$, the individual effect, and $\epsilon_{ijl} \sim N(0,\sigma_{\epsilon}^2)$, the random error, which are the random effects of the model.
+
+$CCC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\beta}^2+\sigma_{\epsilon}^2}$.
+
+Working with the restriction on the sum of the rater effects have to be equal to zero ($\sum_{j=1}^k \beta_j = 0$), the variability among all raters can be derived:
+
+$$\hat \sigma_{\beta}^2 = \frac{\sum_{j=1}^{k-1} \sum_{j'=j+1}^{k} (\beta_j-\beta_{j'})^2}{k(k-1)}$$ 
+
+It has also been derived in terms of the raters means, given that the rater effect (under the expressed conditions) is just the difference between the mean of the particular rater and the global mean, which was a step taken to proof the concordance with the other CCC proposals. The issue of this estimate is that in @searle1992 it was proven to be biased, which then led to the expression of the unbiased estimate in the matrix form $\hat \sigma_{\beta}^2 = \frac{1}{k(k-1)} \{\hat\beta'LL'\hat\beta - trace(LL'\hat \Sigma_\beta)\}$, where $L$ is the fixed effects contrast matrix and $\hat\Sigma_\beta$ is the variance-covariance matrix of the fixed effects^[This correction for the CCC was later introduced (Carrasco, 2009), specifically for the longitudinal case.].
+
+The formula was first expanded in @lin2007 with a subject-rater interaction term (random effect) $\alpha\beta_{ij} \sim N(0,\sigma_{\alpha\beta}^2)$, and then further expanded for repeated measurements, with particular attention to the longitudinal case (Carrasco, 2009), which led to the inclusion of a further subindex $t$ to allow multiple replicates per individual per time. The Variance Components approach to estimate the longitudinal CCC with repeated measures rests on the following Normal-Normal Linear Mixed effects model:
+
+$$Y_{ijtl} = \mu + \alpha_i + \beta_j + \gamma_t + \alpha\beta_{ij} + \alpha\gamma_{it} + \beta\gamma_{jt} + \epsilon_{ijtl}$$
+
+where $\beta_j$ and $\gamma_t$ are the fixed effects related with method and time, $\mu$ is the overall mean, and the rest of the components are the random effects of the model (which are assumed to be normal). For the estimation of the variance that comes from the systematic differences between observers across time (the fixed effects) a similar correction was applied: $\hat\sigma_{\beta\gamma}^2 = \frac{1}{pk(k-1)} \{\hat\beta'LL'\hat\beta - trace(LL'\hat \Sigma_\beta)\}$, with $p$ reflecting the number of times. The final formula is the following:
+
+$$CCC = \frac{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}{\sigma_{\alpha}^2 + \sigma_{\alpha\beta}^2 + \sigma_{\alpha\gamma}^2 + \sigma_{\beta\gamma}^2+\sigma_{\epsilon}^2}$$
+
+
+
+## A Bayesian Estimate
+
+A proposal for the CCC was later developed under the bayesian approach in @bhattacharjee2015, which was then expanded in @feng2015 and in @feng2018 by defining robust priors to handle skewed data, and in @vanbelle2017 the distributions for bounded data. While this approach can be computationally expensive, and require an extensive number of iterations for the CCC to reach a reasonable effective sample size in the MCMC[^02_literature_review-2], and be burdened to misspecification due to the explicit definition of the model assumptions that are required, through a proper selection of selection of the priors, a bayesian CCC estimate might show to be more robust than the estimates were the assumptions are taken implicitly. For the purpose of this thesis, the estimate has been extended to the longitudinal case through the Variance Components approach previously explained, and the fitting of the Linear Mixed Model has fully implemented in R, only requiring the installation of R packages and without the requirement of external software (previous implementations required the installation of jags, but now the bayesian inference is carried through stan [@rstan])^[There are alternative native implementations of the MCMC algorithm in R, as the *MCMCglmm* package, that would allow a comparable implementation.]. The hierarchical priors for the standard deviations and for the error term of the LMM are truncated at zero, in order to avoid negative values, t-student distributions with $3$ degrees of freedom and a standard deviation of $2.5$, while the fixed intercept $\mu$ has also a t-student prior, which it is not truncated, and has a default value of $5.8$. The selection of the priors has purposely been confined to weakly informative priors, which were modified appropriately for the lognormal-normal model extension^[See following section.].
+
+[^02_literature_review-2]: @feng2015 .

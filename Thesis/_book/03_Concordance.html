@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Thesis – 4&nbsp; Handling non-normality in Concordance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_Sim.html" rel="next">
+<link href="./02_Literature_review.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_Concordance.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Handling non-normality in Concordance</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Thesis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Motivation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Aims.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Aims</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Literature_review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Concordance correlation coefficient</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Concordance.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Handling non-normality in Concordance</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_Sim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulation &amp; Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Case_Study1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Case Study 1: Microbioal tooth data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_Case_Study2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Case Study 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_Limitations_Conclusions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Limitations &amp; Conclusions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sim_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Additional Information on the simulation results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#adapting-the-ccc-distributional-assumption" id="toc-adapting-the-ccc-distributional-assumption" class="nav-link active" data-scroll-target="#adapting-the-ccc-distributional-assumption"><span class="header-section-number">4.1</span> Adapting the CCC distributional assumption</a></li>
+  <li><a href="#the-lognormal-normal-linear-mixed-model" id="toc-the-lognormal-normal-linear-mixed-model" class="nav-link" data-scroll-target="#the-lognormal-normal-linear-mixed-model"><span class="header-section-number">4.2</span> The Lognormal-Normal Linear Mixed Model</a></li>
+  <li><a href="#the-skew-normal-model" id="toc-the-skew-normal-model" class="nav-link" data-scroll-target="#the-skew-normal-model"><span class="header-section-number">4.3</span> The Skew-Normal Model</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Handling non-normality in Concordance</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>While the main line of research in the literature, and in this thesis, was to focus in finding robust estimators of the CCC to misspecification, there has been an important line of research into properly characterizing the underlying distribution of the data, mostly through a bayesian framework, as in <span class="citation" data-cites="vanbelle2017">Vanbelle and Lesaffre (<a href="references.html#ref-vanbelle2017" role="doc-biblioref">2017</a>)</span> or in <span class="citation" data-cites="feng2018">Feng, Baumgartner, and Svetnik (<a href="references.html#ref-feng2018" role="doc-biblioref">2018</a>)</span>; but with a key frequentist contribution in <span class="citation" data-cites="carrasco2009a">Josep L. Carrasco (<a href="references.html#ref-carrasco2009a" role="doc-biblioref">2009</a>)</span>, where a version of the generalized concordance correlation coefficient through the variance components of a generalized linear mixed model was provided. The rest of this section discusses first the findings from this paper, to then expand it, as it underscores the simulation approach, which is detailed in its section.</p>
+<section id="adapting-the-ccc-distributional-assumption" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="adapting-the-ccc-distributional-assumption"><span class="header-section-number">4.1</span> Adapting the CCC distributional assumption</h2>
+<p>Another definition of the Concordance Correlation Coefficient<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, developed for the distributions of the exponential family, is the intraclass correlation between any measurement from different raters on the same subject:</p>
+<p><span class="math inline">\(CCC = \frac{cov(Y_{ijl},Y_{ij'l'})}{Var(Y_{ijl})}\)</span>, with the marginal variance can be further develop (through the law of total variance) into: <span class="math inline">\(Var(Y_{ijl}) = var_u(\mu_{ij})+E_u[\phi h(\mu_{ij})]\)</span>, with <span class="math inline">\(\phi\)</span> being the dispersion parameter. The marginal covariance can also be expanded, given the assumption that the effects that condition the observations are independent, as <span class="math inline">\(cov(Y_{ijl},Y_{ij'l'}) = cov_u(\mu_{ij},\mu_{ij'})\)</span>.</p>
+<p>This led to the definition of a general formula for the Generalized Concordance Correlation Coefficient: <span class="math inline">\(GCCC = \frac{cov_u(\mu_{ij},\mu_{ij'})}{var_u(\mu_{ij})+E_u[\phi h(\mu_{ij})]}\)</span>.</p>
+<p>Given that under a Normal distributed response variable the terms can be expressed in the form (as in <span class="citation" data-cites="carrasco2009">Josep L. Carrasco, King, and Chinchilli (<a href="references.html#ref-carrasco2009" role="doc-biblioref">2009</a>)</span>): <span class="math inline">\(cov_u(\mu_{ij},\mu_{ij'}) = \sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2\)</span>, <span class="math inline">\(var_u(\mu_{ij}) = \sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2\)</span>, and <span class="math inline">\(E_u[\phi h(\mu_{ij})] = \sigma_{\epsilon}^2\)</span> given <span class="math inline">\(\phi = \sigma_{\epsilon}^2\)</span> and <span class="math inline">\(h(\mu_{ij}) = 1\)</span> under the normal distribution for the longitudinal case. This leads to the general expression of <span class="math inline">\(CCC = \frac{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2+\sigma_{\epsilon}^2}\)</span>.</p>
+<p>For the Poisson and overdispersed Poisson case it can be developed into: <span class="math inline">\(CCC = \frac{\mu(e^{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}-1)}{\mu(e^{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2}-1) + \phi}\)</span>, with <span class="math inline">\(\phi\)</span> being the overdispersion parameter (when fixed equal to one gives the coefficient’s estimate for the Poisson distribution). An extended review of this parametrization for Variance Components, U-statistics and GEE can be found in <span class="citation" data-cites="tsai2018">Tsai and Lin (<a href="references.html#ref-tsai2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p>Similarly for the Negative-Binomial distribution: <span class="math inline">\(CCC = \frac{\mu(e^{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}-1)}{\mu((r+1)e^{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2}-1) + \phi}\)</span>. An adaptation for the presence of zero-inflated cases is also provided (Carrasco, 2009).</p>
+</section>
+<section id="the-lognormal-normal-linear-mixed-model" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-lognormal-normal-linear-mixed-model"><span class="header-section-number">4.2</span> The Lognormal-Normal Linear Mixed Model</h2>
+<p>While the previous extensions provided reasonable adaptations for count and overdispersed data, when handling skewed data, it has been proposed (Carrasco, 2007) to keep the normality of the response and of the residuals and assume that the subject effect follows a log-normal. Given that the variance formula of a log-normal random variable is the following <span class="math inline">\(\sigma_\alpha^2 = \exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1)\)</span>, with <span class="math inline">\(\mu_{log\alpha}\)</span> and <span class="math inline">\(\sigma_{log\alpha}^2\)</span> representing the mean and variance of the logarithm of <span class="math inline">\(\alpha\)</span>, then the non-longitudinal version of the coefficient is the following:</p>
+<p><span class="math display">\[CCC = \frac{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1)}{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_\beta^2 + \sigma_e^2}\]</span></p>
+<p>The methodological discussion behind its extension to the longitudinal case is whether the subject-method and subject-time interactions should be considered log-normal, or the skewness can it itself be captured by the subject effect (this has been the underlying assumption for generating skewed data for the simulations, as it offers a less complex analytical form, given that a sum of log-normals does not have a closed form<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>). The CCC formula for the latter would be the following:</p>
+<p><span class="math display">\[CCC = \frac{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_{\alpha\gamma}^2}{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_{\alpha\beta}^2+ \sigma_{\alpha\gamma}^2 + \sigma_{\beta\gamma}^2 + \sigma_e^2}\]</span></p>
+</section>
+<section id="the-skew-normal-model" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-skew-normal-model"><span class="header-section-number">4.3</span> The Skew-Normal Model</h2>
+<p>The last proposal to be reviewed can be seen as a hybrid approach between the correct specification and the robust estimators. In <span class="citation" data-cites="feng2018">Feng, Baumgartner, and Svetnik (<a href="references.html#ref-feng2018" role="doc-biblioref">2018</a>)</span>, the authors propose the skew-normal distribution (a generalization of the normal distribution that allows skewness), while maintain the standard CCC formula, after applying a correction on the estimated parameters, with <span class="math inline">\(\mu_j^* = \mu_j + \sqrt\frac{2}{\pi} \delta_j\)</span> and <span class="math inline">\(\Sigma^* = \Sigma + (1-\frac{2}{\pi})\delta\delta'\)</span>. The development for a skew-t-student distribution was also provided. As of 2024, while there has been no proposed extension to the longitudinal case, since june the underlying model required can now be fitted through the <em>glmmtmb</em> formula of the glmmtmb<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> R package (from a frequentist perspective) or through the function provided developed here for the bayesian method (which relies on the <em>brms</em><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>implementation).</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Feng2014" class="csl-entry" role="listitem">
+n.d.
+</div>
+<div id="ref-armour2024" class="csl-entry" role="listitem">
+Armour, Marc, Joanne Michou, Imogen Schofield, and Karla Borland. 2024. <span>“Agreement of Doppler Ultrasound and Visual Sphygmomanometer Needle Oscillation with Invasive Blood Pressure in Anaesthetised Dogs.”</span> <em>Animals</em> 14 (19): 2756. <a href="https://doi.org/10.3390/ani14192756">https://doi.org/10.3390/ani14192756</a>.
+</div>
+<div id="ref-bahloul2024" class="csl-entry" role="listitem">
+Bahloul, Mohamed A., Saima Jabeen, Sara Benoumhani, Habib Abdulmohsen Alsaleh, Zehor Belkhatir, and Areej Al-Wabil. 2024. <span>“Advancements in Synthetic CT Generation from MRI: A Review of Techniques, and Trends in Radiation Therapy Planning.”</span> <em>Journal of Applied Clinical Medical Physics</em> 25 (11). <a href="https://doi.org/10.1002/acm2.14499">https://doi.org/10.1002/acm2.14499</a>.
+</div>
+<div id="ref-barnhart2002" class="csl-entry" role="listitem">
+Barnhart, Huiman X., Michael Haber, and Jingli Song. 2002. <span>“Overall Concordance Correlation Coefficient for Evaluating Agreement Among Multiple Observers.”</span> <em>Biometrics</em> 58 (4): 1020–27. <a href="https://doi.org/10.1111/j.0006-341x.2002.01020.x">https://doi.org/10.1111/j.0006-341x.2002.01020.x</a>.
+</div>
+<div id="ref-bhattacharjee2015" class="csl-entry" role="listitem">
+Bhattacharjee, Atanu, and Tapesh Bhattacharyya. 2015. <span>“Bayesian Concordance Correlation Coefficient with Application to Repeatedly Measured Data.”</span> <em>Turkiye Klinikleri Journal of Biostatistics</em> 7 (2): 55–62. <a href="https://doi.org/10.5336/biostatic.2015-46702">https://doi.org/10.5336/biostatic.2015-46702</a>.
+</div>
+<div id="ref-glmmTMB" class="csl-entry" role="listitem">
+Brooks, Mollie E., Kasper Kristensen, Koen J. van, Arni Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin Maechler, and Benjamin M. Bolker. 2017. <span>“<span></span>glmmTMB<span></span> Balances Speed and Flexibility Among Packages for Zero-Inflated Generalized Linear Mixed Modeling”</span> 9. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
+</div>
+<div id="ref-brms" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017b. <span>“<span></span>Brms<span></span>: An <span></span>r<span></span> Package for <span></span>Bayesian<span></span> Multilevel Models Using <span></span>Stan<span></span>”</span> 80. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-brms-2" class="csl-entry" role="listitem">
+———. 2017a. <span>“<span></span>Brms<span></span>: An <span></span>r<span></span> Package for <span></span>Bayesian<span></span> Multilevel Models Using <span></span>Stan<span></span>”</span> 80. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-carrasco2009a" class="csl-entry" role="listitem">
+Carrasco, Josep L. 2009. <span>“A Generalized Concordance Correlation Coefficient Based on the Variance Components Generalized Linear Mixed Models for Overdispersed Count Data.”</span> <em>Biometrics</em> 66 (3): 897–904. <a href="https://doi.org/10.1111/j.1541-0420.2009.01335.x">https://doi.org/10.1111/j.1541-0420.2009.01335.x</a>.
+</div>
+<div id="ref-carrasco2003" class="csl-entry" role="listitem">
+Carrasco, Josep L., and Lluís Jover. 2003. <span>“Estimating the Generalized Concordance Correlation Coefficient Through Variance Components.”</span> <em>Biometrics</em> 59 (4): 849–58. <a href="https://doi.org/10.1111/j.0006-341x.2003.00099.x">https://doi.org/10.1111/j.0006-341x.2003.00099.x</a>.
+</div>
+<div id="ref-carrasco2007" class="csl-entry" role="listitem">
+Carrasco, Josep L., Lluis Jover, Tonya S. King, and Vernon M. Chinchilli. 2007. <span>“Comparison of Concordance Correlation Coefficient Estimating Approaches with Skewed Data.”</span> <em>Journal of Biopharmaceutical Statistics</em> 17 (4): 673–84. <a href="https://doi.org/10.1080/10543400701329463">https://doi.org/10.1080/10543400701329463</a>.
+</div>
+<div id="ref-carrasco2009" class="csl-entry" role="listitem">
+Carrasco, Josep L., Tonya S. King, and Vernon M. Chinchilli. 2009. <span>“The Concordance Correlation Coefficient for Repeated Measures Estimated by Variance Components.”</span> <em>Journal of Biopharmaceutical Statistics</em> 19 (1): 90–105. <a href="https://doi.org/10.1080/10543400802527890">https://doi.org/10.1080/10543400802527890</a>.
+</div>
+<div id="ref-cccrm" class="csl-entry" role="listitem">
+Carrasco, Josep Lluis, and Gonzalo Peon Pena. 2024. <span>“Cccrm: Concordance Correlation Coefficient for Repeated (and Non-Repeated) Measures.”</span>
+</div>
+<div id="ref-carrasco2013" class="csl-entry" role="listitem">
+Carrasco, Josep L., Brenda R. Phillips, Josep Puig-Martinez, Tonya S. King, and Vernon M. Chinchilli. 2013. <span>“Estimation of the Concordance Correlation Coefficient for Repeated Measures Using SAS and R.”</span> <em>Computer Methods and Programs in Biomedicine</em> 109 (3): 293–304. <a href="https://doi.org/10.1016/j.cmpb.2012.09.002">https://doi.org/10.1016/j.cmpb.2012.09.002</a>.
+</div>
+<div id="ref-chen2008" class="csl-entry" role="listitem">
+Chen, Chia-Cheng, and Huiman X. Barnhart. 2008. <span>“Comparison of ICC and CCC for Assessing Agreement for Data Without and with Replications.”</span> <em>Computational Statistics &amp; Data Analysis</em> 53 (2): 554–64. <a href="https://doi.org/10.1016/j.csda.2008.09.026">https://doi.org/10.1016/j.csda.2008.09.026</a>.
+</div>
+<div id="ref-cohen1960" class="csl-entry" role="listitem">
+Cohen, Jacob. 1960. <span>“A Coefficient of Agreement for Nominal Scales.”</span> <em>Educational and Psychological Measurement</em> 20 (1): 37–46. <a href="https://doi.org/10.1177/001316446002000104">https://doi.org/10.1177/001316446002000104</a>.
+</div>
+<div id="ref-cohen1968" class="csl-entry" role="listitem">
+———. 1968. <span>“Weighted Kappa: Nominal Scale Agreement Provision for Scaled Disagreement or Partial Credit.”</span> <em>Psychological Bulletin</em> 70 (4): 213–20. <a href="https://doi.org/10.1037/h0026256">https://doi.org/10.1037/h0026256</a>.
+</div>
+<div id="ref-lin2000" class="csl-entry" role="listitem">
+<span>“Correction: A Note on the Concordance Correlation Coefficient.”</span> 2000. <em>Biometrics</em> 56 (1): 324–25.
+</div>
+<div id="ref-donner2002" class="csl-entry" role="listitem">
+Donner, Allan, and Guangyong Zou. 2002. <span>“Testing the Equality of Dependent Intraclass Correlation Coefficients.”</span> <em>Journal of the Royal Statistical Society: Series D (The Statistician)</em> 51 (3): 367–79. <a href="https://doi.org/10.1111/1467-9884.00324">https://doi.org/10.1111/1467-9884.00324</a>.
+</div>
+<div id="ref-efron1979" class="csl-entry" role="listitem">
+Efron, B. 1979. <span>“Bootstrap Methods: Another Look at the Jackknife.”</span> <em>The Annals of Statistics</em> 7 (1). <a href="https://doi.org/10.1214/aos/1176344552">https://doi.org/10.1214/aos/1176344552</a>.
+</div>
+<div id="ref-efron1987" class="csl-entry" role="listitem">
+Efron, Bradley. 1987. <span>“Better Bootstrap Confidence Intervals.”</span> <em>Journal of the American Statistical Association</em> 82 (397): 171–85. <a href="https://doi.org/10.1080/01621459.1987.10478410">https://doi.org/10.1080/01621459.1987.10478410</a>.
+</div>
+<div id="ref-agRee" class="csl-entry" role="listitem">
+Feng, Dai. 2020a. <span>“agRee: Various Methods for Measuring Agreement.”</span> <a href="https://CRAN.R-project.org/package=agRee">https://CRAN.R-project.org/package=agRee</a>.
+</div>
+<div id="ref-agRee-2" class="csl-entry" role="listitem">
+———. 2020b. <span>“agRee: Various Methods for Measuring Agreement.”</span> <a href="https://CRAN.R-project.org/package=agRee">https://CRAN.R-project.org/package=agRee</a>.
+</div>
+<div id="ref-feng2013" class="csl-entry" role="listitem">
+Feng, Dai, Richard Baumgartner, and Vladimir Svetnik. 2013. <span>“A Short Note on Jackknifing the Concordance Correlation Coefficient.”</span> <em>Statistics in Medicine</em> 33 (3): 514–16. <a href="https://doi.org/10.1002/sim.5931">https://doi.org/10.1002/sim.5931</a>.
+</div>
+<div id="ref-feng2015" class="csl-entry" role="listitem">
+———. 2015. <span>“A Bayesian Estimate of the Concordance Correlation Coefficient with Skewed Data.”</span> <em>Pharmaceutical Statistics</em> 14 (4): 350–58. <a href="https://doi.org/10.1002/pst.1692">https://doi.org/10.1002/pst.1692</a>.
+</div>
+<div id="ref-feng2018" class="csl-entry" role="listitem">
+———. 2018. <span>“A Bayesian Framework for Estimating the Concordance Correlation Coefficient Using Skew-Elliptical Distributions.”</span> <em>The International Journal of Biostatistics</em> 14 (1). <a href="https://doi.org/10.1515/ijb-2017-0050">https://doi.org/10.1515/ijb-2017-0050</a>.
+</div>
+<div id="ref-fisher1925" class="csl-entry" role="listitem">
+Fisher, R. A. 1925. <em>Statistical Methods for Research Workers, 11th Ed. Rev.</em> Edited by Oliver and Boyd. Edinburgh: Oliver; Boyd.
+</div>
+<div id="ref-gatti2024" class="csl-entry" role="listitem">
+Gatti, Stefano, Emanuele Rezoagli, Fabiana Madotto, Giuseppe Foti, and Giacomo Bellani. 2024. <span>“A Non-Invasive Continuous and Real-Time Volumetric Monitoring in Spontaneous Breathing Subjects Based on Bioimpedance<span></span>ExSpiron®Xi: A Validation Study in Healthy Volunteers.”</span> <em>Journal of Clinical Monitoring and Computing</em> 38 (2): 539–51. <a href="https://doi.org/10.1007/s10877-023-01107-0">https://doi.org/10.1007/s10877-023-01107-0</a>.
+</div>
+<div id="ref-king2001a" class="csl-entry" role="listitem">
+King, Tonya S., and Vernon M. Chinchilli. 2001a. <span>“ROBUST ESTIMATORS OF THE CONCORDANCE CORRELATION COEFFICIENT.”</span> <em>Journal of Biopharmaceutical Statistics</em> 11 (3): 83–105. <a href="https://doi.org/10.1081/bip-100107651">https://doi.org/10.1081/bip-100107651</a>.
+</div>
+<div id="ref-king2001" class="csl-entry" role="listitem">
+———. 2001b. <span>“A Generalized Concordance Correlation Coefficient for Continuous and Categorical Data.”</span> <em>Statistics in Medicine</em> 20 (14): 2131–47. <a href="https://doi.org/10.1002/sim.845">https://doi.org/10.1002/sim.845</a>.
+</div>
+<div id="ref-king2007" class="csl-entry" role="listitem">
+King, Tonya S., Vernon M. Chinchilli, and Josep L. Carrasco. 2007. <span>“A Repeated Measures Concordance Correlation Coefficient.”</span> <em>Statistics in Medicine</em> 26 (16): 3095–3113. <a href="https://doi.org/10.1002/sim.2778">https://doi.org/10.1002/sim.2778</a>.
+</div>
+<div id="ref-konishi1987" class="csl-entry" role="listitem">
+Konishi, Sadanori, and A. K. Gupta. 1987. <span>“Inferences about Interclass and Intraclass Correlations from Familial Data.”</span> In, 225–33. Springer Netherlands. <a href="https://doi.org/10.1007/978-94-009-4794-8_12">https://doi.org/10.1007/978-94-009-4794-8_12</a>.
+</div>
+<div id="ref-lin1989" class="csl-entry" role="listitem">
+Lin, Lawrence I-Kuei. 1989. <span>“A Concordance Correlation Coefficient to Evaluate Reproducibility.”</span> <em>Biometrics</em> 45 (1): 255. <a href="https://doi.org/10.2307/2532051">https://doi.org/10.2307/2532051</a>.
+</div>
+<div id="ref-lin2007" class="csl-entry" role="listitem">
+Lin, Lawrence, A. S. Hedayat, and Wenting Wu. 2007. <span>“A Unified Approach for Assessing Agreement for Continuous and Categorical Data.”</span> <em>Journal of Biopharmaceutical Statistics</em> 17 (4): 629–52. <a href="https://doi.org/10.1080/10543400701376498">https://doi.org/10.1080/10543400701376498</a>.
+</div>
+<div id="ref-lüdecke2021" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Mattan Ben-Shachar, Indrajeet Patil, Philip Waggoner, and Dominique Makowski. 2021. <span>“Performance: An r Package for Assessment, Comparison and Testing of Statistical Models.”</span> <em>Journal of Open Source Software</em> 6 (60): 3139. <a href="https://doi.org/10.21105/joss.03139">https://doi.org/10.21105/joss.03139</a>.
+</div>
+<div id="ref-mitra2022" class="csl-entry" role="listitem">
+Mitra, Vikramjit, Hsiang-Yun Sherry Chien, Vasudha Kowtha, Joseph Yitan Cheng, and Erdrin Azemi. 2022. <span>“Speech Emotion: Investigating Model Representations, Multi-Task Learning and Knowledge Distillation.”</span> <em>Interspeech 2022</em>, September, 4715–19. <a href="https://doi.org/10.21437/interspeech.2022-957">https://doi.org/10.21437/interspeech.2022-957</a>.
+</div>
+<div id="ref-moreno2018" class="csl-entry" role="listitem">
+Moreno, J, NB Vaz, JC Soler, JL Carrasco, S Podlipnick, S Puig, and Oleaga L. 2018. <span>“High Signal Intensity in the Dentate Nucleus on Unenhanced T1-Weighted MR Images in Melanoma Patients Receiving Macrocyclic Gadolinium-Based Contrast.”</span> <em>Journal of Radiology and Diagnostic Methods</em> 1.
+</div>
+<div id="ref-pek2018" class="csl-entry" role="listitem">
+Pek, Jolynn, Octavia Wong, and Augustine C. M. Wong. 2018. <span>“How to Address Non-Normality: A Taxonomy of Approaches, Reviewed, and Illustrated.”</span> <em>Frontiers in Psychology</em> 9 (November). <a href="https://doi.org/10.3389/fpsyg.2018.02104">https://doi.org/10.3389/fpsyg.2018.02104</a>.
+</div>
+<div id="ref-neuroima2009" class="csl-entry" role="listitem">
+Preston, D. C., and B. E. Shapiro, eds. 2009. <span>“Neuroimaging in Neurology: An Interactive CD.”</span> <em>American Journal of Neuroradiology</em> 30 (8): E125–25. <a href="https://doi.org/10.3174/ajnr.a1685">https://doi.org/10.3174/ajnr.a1685</a>.
+</div>
+<div id="ref-searle1992" class="csl-entry" role="listitem">
+Searle, Shayle R., George Casella, and Charles E. McCulloch. 1992. <span>“Variance Components.”</span> <em>Wiley Series in Probability and Statistics</em>, March. <a href="https://doi.org/10.1002/9780470316856">https://doi.org/10.1002/9780470316856</a>.
+</div>
+<div id="ref-shirato2022" class="csl-entry" role="listitem">
+Shirato, Midori, Keisuke Nakamura, Taichi Tenkumo, Yoshimi Niwano, Taro Kanno, Keiichi Sasaki, Peter Lingström, and Ulf Örtengren. 2022. <span>“Inhibition of Tooth Demineralization Caused by Streptococcus Mutans Biofilm via Antimicrobial Treatment Using Hydrogen Peroxide Photolysis.”</span> <em>Clinical Oral Investigations</em> 27 (2): 739–50. <a href="https://doi.org/10.1007/s00784-022-04821-2">https://doi.org/10.1007/s00784-022-04821-2</a>.
+</div>
+<div id="ref-rstan" class="csl-entry" role="listitem">
+Stan Development Team. 2024. <span>“<span></span>RStan<span></span>: The <span></span>r<span></span> Interface to <span></span>Stan<span></span>.”</span> <a href="https://mc-stan.org/">https://mc-stan.org/</a>.
+</div>
+<div id="ref-tsai2018" class="csl-entry" role="listitem">
+Tsai, Miao-Yu, and Chao-Chun Lin. 2018. <span>“Concordance Correlation Coefficients Estimated by Variance Components for Longitudinal Normal and Poisson Data.”</span> <em>Computational Statistics &amp; Data Analysis</em> 121 (May): 57–70. <a href="https://doi.org/10.1016/j.csda.2017.12.003">https://doi.org/10.1016/j.csda.2017.12.003</a>.
+</div>
+<div id="ref-vanbelle2017" class="csl-entry" role="listitem">
+Vanbelle, Sophie, and Emmanuel Lesaffre. 2017. <span>“Modeling Agreement on Bounded Scales.”</span> <em>Statistical Methods in Medical Research</em> 27 (11): 3460–77. <a href="https://doi.org/10.1177/0962280217705709">https://doi.org/10.1177/0962280217705709</a>.
+</div>
+<div id="ref-wheatland2022" class="csl-entry" role="listitem">
+Wheatland, Rand. 2022. <span>“Pervasive Abuse of Log-Transformed Data in Viral Load Analyses.”</span> <em>Clinical Microbiology and Infection</em> 28 (12): 1669–70. <a href="https://doi.org/10.1016/j.cmi.2022.08.020">https://doi.org/10.1016/j.cmi.2022.08.020</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>There are other alternate definitions of the CCC, as the inter-CCC, for inter-rater agreement, and intra-CCC, for intra-rater agreement, as defined in <span class="citation" data-cites="lin2007">L. Lin, Hedayat, and Wu (<a href="references.html#ref-lin2007" role="doc-biblioref">2007</a>)</span>, which are not discussed in this thesis. Using the same nomenclature, the CCC index discussed is the one of <em>Total Agreement</em>, which has also been referenced as <em>Overall CCC</em> (OCCC) in the literature.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>While for the purposes of the simulations under skewness and misspecification the approach followed can be considered as sufficient, for the appropriate implementation of the the lognormal-normal estimation method, the proper distributional form of the interactions should be discussed.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="glmmTMB">Brooks et al. (<a href="references.html#ref-glmmTMB" role="doc-biblioref">2017</a>)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><span class="citation" data-cites="brms-2">Bürkner (<a href="references.html#ref-brms-2" role="doc-biblioref">2017a</a>)</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_Literature_review.html" class="pagination-link" aria-label="The Concordance correlation coefficient">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Concordance correlation coefficient</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_Sim.html" class="pagination-link" aria-label="Simulation &amp; Methods">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulation &amp; Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

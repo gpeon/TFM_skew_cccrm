@@ -1,0 +1,35 @@
+# Handling non-normality in Concordance
+
+While the main line of research in the literature, and in this thesis, was to focus in finding robust estimators of the CCC to misspecification, there has been an important line of research into properly characterizing the underlying distribution of the data, mostly through a bayesian framework, as in @vanbelle2017 or in @feng2018; but with a key frequentist contribution in @carrasco2009a, where a version of the generalized concordance correlation coefficient through the variance components of a generalized linear mixed model was provided. The rest of this section discusses first the findings from this paper, to then expand it, as it underscores the simulation approach, which is detailed in its section.
+
+## Adapting the CCC distributional assumption
+
+Another definition of the Concordance Correlation Coefficient^[There are other alternate definitions of the CCC, as the inter-CCC, for inter-rater agreement, and intra-CCC, for intra-rater agreement, as defined in @lin2007, which are not discussed in this thesis. Using the same nomenclature, the CCC index discussed is the one of *Total Agreement*, which has also been referenced as *Overall CCC* (OCCC) in the literature.], developed for the distributions of the exponential family, is the intraclass correlation between any measurement from different raters on the same subject:
+
+$CCC = \frac{cov(Y_{ijl},Y_{ij'l'})}{Var(Y_{ijl})}$, with the marginal variance can be further develop (through the law of total variance) into: $Var(Y_{ijl}) = var_u(\mu_{ij})+E_u[\phi h(\mu_{ij})]$, with $\phi$ being the dispersion parameter. The marginal covariance can also be expanded, given the assumption that the effects that condition the observations are independent, as $cov(Y_{ijl},Y_{ij'l'}) = cov_u(\mu_{ij},\mu_{ij'})$.
+
+This led to the definition of a general formula for the Generalized Concordance Correlation Coefficient: $GCCC = \frac{cov_u(\mu_{ij},\mu_{ij'})}{var_u(\mu_{ij})+E_u[\phi h(\mu_{ij})]}$.
+
+Given that under a Normal distributed response variable the terms can be expressed in the form (as in @carrasco2009): $cov_u(\mu_{ij},\mu_{ij'}) = \sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2$, $var_u(\mu_{ij}) = \sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2$, and $E_u[\phi h(\mu_{ij})] = \sigma_{\epsilon}^2$ given $\phi = \sigma_{\epsilon}^2$ and $h(\mu_{ij}) = 1$ under the normal distribution for the longitudinal case. This leads to the general expression of $CCC = \frac{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2+\sigma_{\epsilon}^2}$.
+
+For the Poisson and overdispersed Poisson case it can be developed into: $CCC = \frac{\mu(e^{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}-1)}{\mu(e^{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2}-1) + \phi}$, with $\phi$ being the overdispersion parameter (when fixed equal to one gives the coefficient's estimate for the Poisson distribution). An extended review of this parametrization for Variance Components, U-statistics and GEE can be found in @tsai2018.
+
+Similarly for the Negative-Binomial distribution: $CCC = \frac{\mu(e^{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}-1)}{\mu((r+1)e^{\sigma_{\alpha}^2+\sigma_{\alpha\beta}^2+\sigma_{\alpha\gamma}^2+\sigma_{\beta\gamma}^2}-1) + \phi}$. An adaptation for the presence of zero-inflated cases is also provided (Carrasco, 2009).
+
+## The Lognormal-Normal Linear Mixed Model
+
+While the previous extensions provided reasonable adaptations for count and overdispersed data, when handling skewed data, it has been proposed (Carrasco, 2007) to keep the normality of the response and of the residuals and assume that the subject effect follows a log-normal. Given that the variance formula of a log-normal random variable is the following $\sigma_\alpha^2 = \exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1)$, with $\mu_{log\alpha}$ and $\sigma_{log\alpha}^2$ representing the mean and variance of the logarithm of $\alpha$, then the non-longitudinal version of the coefficient is the following:
+
+$$CCC = \frac{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1)}{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_\beta^2 + \sigma_e^2}$$
+
+The methodological discussion behind its extension to the longitudinal case is whether the subject-method and subject-time interactions should be considered log-normal, or the skewness can it itself be captured by the subject effect (this has been the underlying assumption for generating skewed data for the simulations, as it offers a less complex analytical form, given that a sum of log-normals does not have a closed form^[While for the purposes of the simulations under skewness and misspecification the approach followed can be considered as sufficient, for the appropriate implementation of the the lognormal-normal estimation method, the proper distributional form of the interactions should be discussed.]). The CCC formula for the latter would be the following:
+
+$$CCC = \frac{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_{\alpha\gamma}^2}{\exp(2\mu_{log\alpha}+\sigma_{log\alpha}^2)(\exp(\sigma_{log\alpha}^2)-1) + \sigma_{\alpha\beta}^2+ \sigma_{\alpha\gamma}^2 + \sigma_{\beta\gamma}^2 + \sigma_e^2}$$
+
+## The Skew-Normal Model
+
+The last proposal to be reviewed can be seen as a hybrid approach between the correct specification and the robust estimators. In @feng2018, the authors propose the skew-normal distribution (a generalization of the normal distribution that allows skewness), while maintain the standard CCC formula, after applying a correction on the estimated parameters, with $\mu_j^* = \mu_j + \sqrt\frac{2}{\pi} \delta_j$ and $\Sigma^* = \Sigma + (1-\frac{2}{\pi})\delta\delta'$. The development for a skew-t-student distribution was also provided. As of 2024, while there has been no proposed extension to the longitudinal case, since june the underlying model required can now be fitted through the *glmmtmb* formula of the glmmtmb[^03_concordance-1] R package (from a frequentist perspective) or through the function provided developed here for the bayesian method (which relies on the *brms*[^03_concordance-2]implementation).
+
+[^03_concordance-1]: @glmmTMB
+
+[^03_concordance-2]: @brms-2

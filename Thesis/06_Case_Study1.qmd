@@ -1,0 +1,253 @@
+# Case Study 1: Microbioal tooth data
+
+While simulation methods offer a computationally expensive but insightful approach on the misspecification of the distributional assumption and its impact, which couldn't have been easily derived from real data, both for its required volume and the large spectrum of parameters to be tested; the review of such a strong and powerful assumption, and its possible misspecification, with real world data is indispensable, as it currently is the field of application of the coefficient. Thus, two datasets have been provided and reviewed. The first has been used as an example of extreme non-normality in a non-longitudinal context, with the assessment on the impact of the transformation of the response variable, while the second dataset offers a longitudinal example with a relevant degree of drop-out, and a certain degree of skewness under one of the methods, whose impact has been explored for the estimates.
+
+The following dataset comes from a pending to be published study[^06_case_study1-1], where the bacterial concentration information of a pair of molars of a total of 33 pediatic patients was collected. These molars were assigned their treatment method following a split mouth design, and the DNA information was collected for each molar using a Qiagen Kit, which allowed to measure the count of colony forming units in the sample, which in the case of this example dataset was of anaerobic bacteria. The dataset also contains information on the solution dilution volume used in the DNA extraction of each sample, and the total count of anaerobic bacteria found, which are necessary parameters to compute the CFU value, and as such they cannot be considered as candidate covariates.
+
+[^06_case_study1-1]: The reference will be theb updated.
+
+Given the highly non-normal, nature of the Colony Forming Units value, the estimation methods' robustness to a strong violation of the normality assumption has been tested, and the usefulness of the log-transformation, one of the main methods suggested to further normalize non-normal data[^06_case_study1-2], has also been assessed.
+
+[^06_case_study1-2]: @pek2018 .
+
+```{r}
+#| include: false
+#| echo: false
+#| warning: false
+
+suppressPackageStartupMessages(library(cccrm))
+suppressPackageStartupMessages(library(ggplot2))
+
+source("functions/ccc_vc_bayes.R")
+source("functions/plot_see.R")
+df.b <- readRDS("data/Reg_bact_count.RDS")
+df.b$Muestra <-sapply(strsplit(df.b$Muestra,"#"), function(x) x[1])
+df.b <- df.b |> dplyr::mutate(Muestra = as.factor(Muestra),Paciente = as.factor(Paciente), log_UFC = log(`UFC/ml`), UFC = `UFC/ml`)
+set.seed(121)
+```
+
+In order to assess the degree of failure of the distributional assumption for the response variable and the error term under the proposed Linear Mixed Model, I have used the `check_distribution` function from the R package **performance**[^06_case_study1-3], a large library focused on model testing tools to review model quality and fit, in order to provide an alternative perspective on the ill-definition of the distribution assumption, beyond visual inspection and the common statistical tests for normality (Shapiro-Wilks, and the non-parametric Kolgomorov-Smirnov). The relies on a Random Forest model in order to give a prediction on the distribution of the data (both response and model residuals) given the key statistics (e.g., mode, mean, median, kurtosis, or skewness) of such data.
+
+[^06_case_study1-3]: @lüdecke2021 .
+
+It is already apparent, given the histogram of the CFU response, that its distribution is rather closer to an exponential than to a normal distribution (with the exponential being the epitome of non-normal distributions). Also, the distributional assumption seems to fail for the model residuals, which also goes against one of the core assumptions with the formulation generally derived for the Concordance Correlation Coefficient when derived from a Linear Mixed Model, where the inference about the error term comes from the interpretation that it represents the measurement error, and thus it should be normally distributed. Then the application of the log-transformation (a monotone transformation) for the CFU values has been a common resource used to further normalize the data before carrying statistical analysis[^06_case_study1-4], and not without its fair share of criticism[^06_case_study1-5] [^06_case_study1-6]. In the right figure, the assessment for the log-transformed response and for the model's error term is shown. While the data seems to be further normalized, more clearly in the residuals case, the log CFU histogram shows a rather bi-modal distribution, which might even question the LMM approach for the concordance correlation coefficient, and thus its validity.
+
+[^06_case_study1-4]: @shirato2022 .
+
+[^06_case_study1-5]: @Feng2014 .
+
+[^06_case_study1-6]: @wheatland2022 .
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| layout-ncol: 2
+#| fig-cap: "Response and residuals predicted distributions"
+#| fig-subcap: 
+#|  - "CFU distribution under the Linear Mixed Model"
+#|  - "log CFU distribution under the Linear Mixed Model"
+
+est1_AF2 <- readRDS("./data/mod_UFC.RDS")
+est2_AF2 <- readRDS("./data/mod_lUFC.RDS")
+
+m1 <- performance::check_distribution(est1_AF2$model)
+plot_see(m1)
+m2 <- performance::check_distribution(est2_AF2$model)
+plot_see(m2)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+pears <- confintr::ci_cor(df.b$UFC[seq(1,66,2)],df.b$UFC[seq(2,66,2)],method = "pearson", type = "bootstrap", boot_type = "bca")
+
+lpears <- confintr::ci_cor(df.b$log_UFC[seq(1,66,2)],df.b$log_UFC[seq(2,66,2)],method = "pearson", type = "bootstrap", boot_type = "bca")
+
+spear <- confintr::ci_cor(df.b$UFC[seq(1,66,2)],df.b$UFC[seq(2,66,2)],method = "spearman", type = "bootstrap", boot_type = "bca")
+
+lspear <- confintr::ci_cor(df.b$log_UFC[seq(1,66,2)],df.b$log_UFC[seq(2,66,2)],method = "spearman", type = "bootstrap", boot_type = "bca")
+```
+
+Given the definition by @lin1989 of the Concordance Correlation Coefficient as a product between the Pearson's correlation coefficient $\rho$ and the bias correction factor $0 < C_b \le 1$ ($CCC = \rho C_b$), the CCC can be viewed as a stricter version of the correlation coefficient, with which it shares the normality assumption. As such non-robust point estimates of the CCC might suffer the identical problem as the correlation coefficient, which for the non-log transformed response variable finds the methods uncorrelated while for the transformed response the  point estimate of correlation is low to medium. In comparison the rank-based Spearman correlation coefficient provides by design a transformation-invariant estimate of the correlation, which can be interpreted as the upper bound of the CCC point estimates, given its definition. It is also poignant to indicate that the log-transformation has not reduced the magnitude of the moderate skewness that was already present in the untransformed data, which will limit the reviewed methods' performances, as seen in the simulation section.
+
+```{r}
+#| echo: false
+load("./data/case_study1_cor.RData")
+
+plot(df.b$log_UFC[seq(1,66,2)],df.b$log_UFC[seq(2,66,2)], xlab = "Log UFC/ml (Untreated)", ylab = "Log UFC/ml (Treated)")
+
+df <- data.frame(
+  Value = c(pears$estimate,lpears$estimate,spear$estimate,lspear$estimate) |> round(4),
+  Lower_CI = c(pears$interval[1],lpears$interval[1],spear$interval[1],lspear$interval[1]) |> round(4),
+  Upper_CI = c(pears$interval[2],lpears$interval[2],spear$interval[2],lspear$interval[2]) |> round(4),
+  stat = c("Pearson", "Pearson (log)", "Spearman", "Spearman (log)")
+) 
+
+legend_text <- apply(df, 1, function(row) {
+  paste0(row["stat"], ": ", row["Value"], 
+         " (CI: ", row["Lower_CI"], " - ", row["Upper_CI"], ")")
+})
+
+legend("bottomright", legend = legend_text, bty = "n", cex = 0.8)
+
+
+legend("topleft", legend = paste0("Skewness \n UFC/ml:",round(EnvStats::skewness(df.b$UFC),4),"\n log(UFC/ml):",round(EnvStats::skewness(df.b$log_UFC),4)), bty = "n", cex = 0.8)
+```
+
+The rest of the review of this case study centers not on the appropriateness of the transformation, but on the study of its impact for the reviewed estimates.
+
+```{r}
+#| eval: false
+#| echo: false
+
+est1_N <- ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "None")
+
+est1_AF2 <- ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL)
+
+est1_AF <- ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "F")
+
+est1_AKG <- ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "KG")
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est1_NBPB <-ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)
+est1_NBPE <-ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = FALSE, boot_ci = "empirical",nboot=500)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est1_BPB <-ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = TRUE, boot_ci = "BCa",nboot=500)
+est1_BPE <-ccc_vc(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = TRUE, boot_ci = "empirical",nboot=500)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est1_U <- cccUst(df.b,ry="UFC",rmet="Muestra",rtime=NULL)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est1_bay <- ccc_vc_bayes(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL, correct = TRUE, n_iter = 10000)
+est1_lbay <- ccc_vc_bayes(df.b,ry="UFC",rind="Paciente",rmet="Muestra",rtime=NULL, correct = TRUE, log_alpha = TRUE, n_iter = 10000, plot.gel = T)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+
+est2_N <- ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "None")
+
+est2_AF2 <- ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL)
+
+est2_AF <- ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "F")
+
+est2_AKG <- ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL, transf = "KG")
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est2_NBPB <-ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)
+est2_NBPE <-ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = FALSE, boot_ci = "empirical",nboot=500)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est2_BPB <-ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = TRUE, boot_ci = "BCa",nboot=500)
+est2_BPE <-ccc_vc(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL,
+                 boot=TRUE,boot_param = TRUE, boot_ci = "empirical",nboot=500)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est2_U <- cccUst(df.b,ry="log_UFC",rmet="Muestra",rtime=NULL)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est2_bay <- ccc_vc_bayes(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL, correct = TRUE, n_iter = 10000, n_burnin = 2000, plot.gel = T)
+est2_lbay <- ccc_vc_bayes(df.b,ry="log_UFC",rind="Paciente",rmet="Muestra",rtime=NULL, log_alpha = TRUE, correct = TRUE, n_iter = 10000, n_burnin = 2000, plot.gel = T)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+
+library(agRee)
+
+df_agree <- df.b |> tidyr::pivot_wider(names_from = Muestra, values_from = UFC, id_cols = Paciente, names_prefix = "Muestra_") |> dplyr::select(-Paciente) |> as.matrix()
+
+df_agree2 <- df.b |> tidyr::pivot_wider(names_from = Muestra, values_from = log_UFC, id_cols = Paciente, names_prefix = "Muestra_") |> dplyr::select(-Paciente) |> as.matrix()
+
+est1_bay_ag <- agRee::agree.ccc(df_agree, method = "mvn.jeffreys", NAaction = "omit") |> unlist()
+est1_sbay_ag <- agRee::agree.ccc(df_agree, method = "mvsn", NAaction = "omit") |>
+  unlist()
+est2_bay_ag <- agRee::agree.ccc(df_agree2, method = "mvn.jeffreys", NAaction = "omit") |> unlist()
+est2_sbay_ag <- agRee::agree.ccc(df_agree2, method = "mvsn", NAaction = "omit") |>
+  unlist()
+est1_sbay_ag[4] <- est2_sbay_ag[4] <- est1_bay_ag[4] <- est2_bay_ag[4] <- NA
+
+names(est1_sbay_ag) <- names(est2_sbay_ag) <- names(est1_bay_ag) <- names(est2_bay_ag) <- c("CCC","LL CI 95%","UL CI 95%","SE CCC")
+```
+
+## Results
+
+```{r}
+#| echo: false
+rm(list = ls())
+load("./data/case_study1_gel.RData")
+```
+
+When working with the untransformed variable, the variance components obtained through the model are themselves levels of magnitude apart (the estimated subject variance was in the order of `e+04` while the estimated methods variance and error term were in the order of `e+11`), which leads to rather extremely small estimated values for the Concordance Correlation Coefficient (for which in the case of the U-statistic estimate even gives a negative value outside of the coefficient's range). The issues with the estimation of the CCC in this dataset also continue when providing 95% confidence intervals (or 95% highest density intervals for the bayesian case), for which the asymptotic method both in its base form and when it relies upon Fisher's Z-transformation, it provides negative lower bound estimates (outside of the bounds of the coefficient), which is also the case for the empirical bootstrap intervals and the U-statistic estimate. The problem observed with the confidence interval after applying the Konishi-Gupta transformation, is that the coefficient estimate lies outside of the CI provided. In that sense, the only non-ill-behaved estimates correspond to the bootstrap BCa estimates (both parametric and non-parametric), and the Bayesian model estimate provided. The other Bayesian implementation reviewed (Normal-Normal and Skewnormal-Normal from the agRee^[@agRee-2] R package) also fails to produce estimates within the bounds of the coefficient.
+
+```{r}
+#| warning: false
+#| echo: false
+aux1 <- est1_N$ccc[1:4] |> rbind(est1_AF$ccc[1:4])  |>
+  rbind(est1_AF2$ccc[1:4]) |> rbind(est1_AKG$ccc[1:4]) |>
+  rbind(est1_BPB$ccc[1:4]) |> rbind(est1_BPE$ccc[1:4]) |> 
+  rbind(est1_NBPB$ccc[1:4]) |> rbind(est1_NBPE$ccc[1:4]) |> 
+  rbind(est1_U) |> rbind(est1_bay$ccc[1:4]) |> rbind(est1_bay_ag) |> rbind(est1_sbay_ag)
+
+rownames(aux1) <- c("Asymptotic","Asymptotic (Fisher's Z)","Asymptotic (Z, m=2)",
+                   "Asymptotic (KG transf)","Param Boot BCa","Param Boot Emp",
+                   "Non-Param Boot BCa","Non-Param Boot Emp","U-stat"
+                   ,"N-N Bayesian (MAP)","N-N Bayesian (agRee)","Skew-N Bayesian (agRee)")
+
+aux1 |> pander::pander(caption = "CCC for CFU/ml model")
+```
+
+After applying the log-transformation, the estimated variance components are of a similar magnitude, and the point estimate for the coefficient has grown across the board (independent of the estimation method). Nonetheless, the lower bound provided by the asymptotic estimate (even after applying Fisher's Z-transform) still falls outside the coefficient's domain. A second point of relevance has been the stabilization of the estimate of the standard deviation of the coefficient, which has grown comparatively much more for the asymptotic method, while for the Bayesian and bootstrap cases only doubled, and it remained reasonably consistent for the U-statistic estimate. Finally, the MAP (Bayesian) estimate of the coefficient clearly diverges from the rest, even when it provides a similar upper bound to other methods, while it remains the most consistent with its estimate for the non-transformed case. The only other estimate close, but still over the samples' spearman correlation coefficient is the skewnormal-normal bayesian estimate, which would indicate that even after the transformation, which effectively shifted the skewness but failed to reduce its magnitude, the generalization approach for the normal distribution, might still not be appropriate.
+
+```{r}
+#| warning: false
+#| echo: false
+aux2 <- est2_N$ccc[1:4] |> rbind(est2_AF$ccc[1:4])  |>
+  rbind(est2_AF2$ccc[1:4]) |> rbind(est2_AKG$ccc[1:4]) |>
+  rbind(est2_BPB$ccc[1:4]) |> rbind(est2_BPE$ccc[1:4]) |> 
+  rbind(est2_NBPB$ccc[1:4]) |> rbind(est2_NBPE$ccc[1:4]) |> 
+  rbind(est2_U) |> rbind(est2_bay$ccc[1:4])  |> rbind(est2_bay_ag) |> rbind(est2_sbay_ag)
+
+rownames(aux2) <- c("Asymptotic","Asymptotic (Fisher's Z)","Asymptotic (Z, m=2)",
+                   "Asymptotic (KG transf)","Param Boot BCa","Param Boot Emp",
+                   "Non-Param Boot BCa","Non-Param Boot Emp","U-stat"
+                   ,"N-N Bayesian (MAP)","N-N Bayesian (agRee)","Skew-N Bayesian (agRee)")
+
+aux2 |> pander::pander(caption = "CCC for log(CFU/ml) model")
+```

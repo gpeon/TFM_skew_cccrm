@@ -1,0 +1,46 @@
+# Additional Information on the simulation results
+
+In this appendix, I have included some additional information on how the specific coefficients were derived for the simulations, the inclusion of the log-normal effects and its impact on the skewness, the rate of failure and the average bias of the point estimate of the evaluated methods, and of the mean skewness of the response variable in the simulations included in this thesis.
+
+## Concordance Levels
+
+Given the standard longitudinal CCC formula derived through variance components $CCC = \frac{\sigma_{\alpha}^2 + \sigma_{\alpha\gamma}^2}{\sigma_{\alpha}^2 + \sigma_{\alpha\beta}^2 + \sigma_{\alpha\gamma}^2 + \sigma_{\beta\gamma}^2+\sigma_{\epsilon}^2}$, the numerator is composed by the subjects and the subject-time random effects' variance while the denominator also includes the variance that can be attributed to the fixed effects, the subject-method variance and the random error variance. For the five levels of CCC evaluated the variance of the subjects' effect was kept fixed at 0.5 and the total variance was also kept fixed at 10, and the different fractions were obtained by modifying the variance given to the subject-time effect and the random error.
+
+## Lognormal effect
+
+A lognormal random variable $X$ can be defined through a location $\mu$ and positive scale parameter $\sigma$ in the following way $X = \exp(\mu + \sigma Z)$, with $Z$ being a standard normal random variable. Its relevant moments for this thesis are its mean, which is $\mu_X = \exp(\mu + \sigma^2/2)$, variance $\sigma_X^2 = [\exp(\sigma^2)-1]\exp(2\mu + \sigma^2)$, and skewness $\gamma_{1_X} = [\exp(\sigma^2)+2]\sqrt{\exp(\sigma^2)-1}$. Given that for the simulations $\sigma_X^2$ was fixed at 0.5, the lognormal scale parameter can be derived with the following formula:
+
+$$\sigma^2 = \log \left( \frac{1+\sqrt{1+4\frac{\sigma_X^2}{\exp(2\mu)}}}{2} \right)$$
+
+The location parameter $\mu$ then allows to control the degree of skewness for a same level of variance (as by reducing the location parameter the scale parameter increases). The two values used in the simulations were $-\log(1)$ and $-\log(10)$ in order to produce different levels of skewness (2.03 and 24.6). 
+
+While in both scenarios the subject effect presents a strong skewness, the skewness of the response variable (which is a sum of the fixed and random effects) is moderated by the other normally distributed variance components, given that the skewness be formulated as a ratio between the mean and the variance $\gamma_1 = \frac{\mu_3}{(\sigma^2)^{3/2}}$, and as the normal random effects are centered at zero they only contribute increasing the total variance of the response variable, and thus reducing the final skewness. The resulting skewness is further discussed in the next section.
+
+
+## Extra tables
+
+As commented in the first set of simulations, both bayesian and U-statistic estimators did not present any significant rate of failure, while the asymptotic and the bootstrap approaches (the bootstrap resamples are generated with the asymptotic method) both show a meaningful failure rate close to the coefficient bounds. The bootstrap rate of failure can be mitigated (see LN-N Model tables) by suppressing the resamples where the asymptotic method failed, but nonetheless they still show the largest failure rates across the board (while now on par with the asymptotic methods for low values of the coefficient, they still show significantly larger failure rates at 0.9) even when taking this into account.
+
+```{r}
+#| echo: false
+readRDS(file = "./data/aux_NA_120.RDS") |> pander::pander(caption = "Failure rate under the N-N Model")
+readRDS(file = "./data/aux_NA_l30.RDS") |> pander::pander(caption = "Failure rate under the lightly skewed LN-N Model")
+readRDS(file = "./data/aux_NA_ll30.RDS") |> pander::pander(caption = "Failure rate under the lightly highly LN-N Model")
+```
+
+When assessing the bias of the point estimates, the use of the bayesian MAP as one did not produce a larger bias than the other discussed approaches, which were generally on par. It was also observed that it the average bias grew (diverged from zero) jointly with the mean skewness.
+
+```{r}
+#| echo: false
+readRDS(file = "./data/aux_b_120.RDS") |> pander::pander(caption = "Average bias under the N-N Model")
+readRDS(file = "./data/aux_b_l30.RDS") |> pander::pander(caption = "Average bias under the lightly skewed LN-N Model")
+readRDS(file = "./data/aux_b_ll30.RDS") |> pander::pander(caption = "Average bias under the lightly highly LN-N Model")
+```
+
+Given how the simulated datasets were constructed, where the subjects' random effect variance, which was the lognormal component of the model, was set at 0.5 (the total variance was 10), it can be seen that under light variance conditions for this lognormal effect it does not produce relevant skewness in the response variable, and it requires a extremely large skewness to meaningfully affect the estimation under this conditions. It follows that if the weight of the lognormal effect was larger of the total variance, its skewness would be less moderated.
+
+```{r}
+#| echo: false
+readRDS(file = "./data/aux_s_l30.RDS") |> pander::pander(caption = "Mean skewness under the lightly skewed LN-N Model")
+readRDS(file = "./data/aux_s_ll30.RDS") |> pander::pander(caption = "Mean skewness under the lightly highly LN-N Model")
+```

@@ -1,0 +1,378 @@
+# Case Study 2
+
+
+```{r}
+#| include: false
+#| echo: false
+library(cccrm)
+source("functions/ccc_vc_bayes.R")
+dades_long <- read.delim("data/dades_long.txt", header=TRUE)
+dades<- dades_long |> dplyr::filter(Visita<=9)
+dades_b<-dades |>
+  tidyr::pivot_longer(
+    cols=c(R1,R2),
+    names_to="ratio"
+  )
+
+dades_c <- dades_long |>
+  tidyr::pivot_longer(
+    cols=c(R1,R2),
+    names_to="ratio"
+  )
+
+NHC_remove <- dades_c |> dplyr::group_by(NHC) |>
+  dplyr::summarise(n_na = sum(is.na(value))) |> dplyr::filter(n_na != 0) |>
+  dplyr::select(NHC) |> unlist()
+
+set.seed(121)
+
+max_visit <- dades_long |> dplyr::filter(! NHC %in% NHC_remove)  |>
+  dplyr::group_by(NHC) |> dplyr::summarise(n_visit = dplyr::n())
+
+max_visit_06 <- max_visit |> dplyr::filter(n_visit >= 6) |> dplyr::select(NHC) |> unlist()
+
+max_visit_09 <- max_visit |> dplyr::filter(n_visit >= 9) |> dplyr::select(NHC) |> unlist()
+
+max_visit_11 <- max_visit |> dplyr::filter(n_visit >= 11) |> dplyr::select(NHC) |> unlist()
+
+## Values to remove
+
+NHC_visit_06 <- dades_c |> dplyr::filter(NHC %in% max_visit_06) |> dplyr::filter(Visita <= 6) |> dplyr::group_by(NHC) |> dplyr::summarise(n_visits = dplyr::n()) |> dplyr::filter(n_visits < 12) |> dplyr::select(NHC) |> unlist()
+
+NHC_visit_09 <- dades_c |> dplyr::filter(NHC %in% max_visit_09) |> dplyr::filter(Visita <= 9) |> dplyr::group_by(NHC) |> dplyr::summarise(n_visits = dplyr::n()) |> dplyr::filter(n_visits < 18) |>
+  dplyr::select(NHC) |> unlist()
+
+NHC_visit_11 <- dades_c |> dplyr::filter(NHC %in% max_visit_11) |> dplyr::filter(Visita <= 11) |> dplyr::group_by(NHC) |> dplyr::summarise(n_visits = dplyr::n()) |> dplyr::filter(n_visits < 22) |>
+  dplyr::select(NHC) |> unlist()
+
+## Observations to include
+
+max_visit_06 <- max_visit_06[!max_visit_06 %in% NHC_visit_06]
+max_visit_09 <- max_visit_09[!max_visit_09 %in% NHC_visit_09]
+max_visit_11 <- max_visit_11[!max_visit_11 %in% NHC_visit_11]
+
+#max_visit |> dplyr::group_by(n_visit) |> dplyr::summarise(n = dplyr::n())
+```
+
+
+The following dataset offers a longitudinal profile of 139 patients with a drop-out mechanism (the minimum number of visits were 3 and the maximum were 12) for the comparison of two techniques, with the addition of potential covariates whose inclusion or lack there off, and even how they should be included raises interesting methodological questions.
+
+It comes from the study @moreno2018, where the objective was to evaluate the evolution of possible gadolinium brain deposits in the patients under treatment through two MRI techniques, which have been seen superior in comparison with CT scans for distinguishing between soft tissues and malignancies, and in their lower inter-observer variability^[@bahloul2024]. The first of the MRI techniques is T1 weighted image, which is based in the observation of differences in the T1 relaxation times of tissues after the application of the contrasting agent (which in this case was a gadolinium based contrast agent), while the second is the T2 weighted image, that as its name suggest captures a different pulse sequence on MRI (focusing on the long repetition and echo times), in this case the differences on the T2 relaxation times (which also reacts differently to the contrasting agent)^[@neuroima2009]. While the T1Wi technique was the main technique through which the dentate nucleus identification was done, the T2Wi was used as an automatic check for the correct identification, and in the cases of non-concordance (those cases seen as doubtful) the decision was made by consensus.
+
+The metric of interest in this case study will be the ratio of the weighted image across the dosages (which in the study, in a secondary analysis, was used to study the dentate nucleus visibility). The dataset also contains information of the machines used for each contrast and the practitioner that conducted the evaluation (plus whether the dentate nucleus was considered visible or not). While it would also be interesting to study the as methods the machine or the practitioner effect, both metrics lack the full design in comparison with the MRI techniques, which were both applied in every patient in every visit.
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 3
+#| fig-cap:  "Distribution of the ratio between techniques"
+
+ggstatsplot::grouped_gghistostats(data = dades_c, x = value, 
+                                  xlab = "Ratio Dens/Pons",
+  grouping.var = ratio,type = "robust",
+  centrality.line.args = list(color = "#D55E00", linetype = "dashed"),
+  bin.args = list(breaks = seq(min(dades_c$value,na.rm = T),max(dades_c$value,na.rm = T), length.out = 30),fill = "lightgray", col = "gray20"),
+  plotgrid.args = list(ncol = 2)
+)
+```
+
+
+```{r}
+#| eval: false
+#| echo: false
+est_N <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita", transf = "None")
+
+est_AF2 <- ccc_vc(dades_b,ry="value",rind="NHC",rmet="ratio",rtime="Visita")
+
+est_AF <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita", transf = "F")
+
+est_AKG <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita", transf = "KG")
+
+est_N_covar <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                      transf = "None", covar = c("Equipo","obs"))
+
+est_AF2_covar <- ccc_vc(dades_b,ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                        covar = c("Equipo","obs"))
+
+est_AF_covar <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita", 
+                       transf = "F", covar = c("Equipo","obs"))
+
+est_AKG_covar <- ccc_vc(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita", transf = "KG", 
+                        covar = c("Equipo","obs"))
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est_NBPB <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)
+est_NBPE <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = FALSE, boot_ci = "empirical",nboot=500)
+
+est_NBPB_covar <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500,covar = c("Equipo","obs"))
+est_NBPE_covar <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = FALSE, boot_ci = "empirical",nboot=500,covar = c("Equipo","obs"))
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est_BPB <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = TRUE, boot_ci = "BCa",nboot=500)
+est_BPE <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = TRUE, boot_ci = "empirical",nboot=500)
+
+est_BPB_covar <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = TRUE, boot_ci = "BCa",nboot=500, covar = c("Equipo","obs"))
+est_BPE_covar <-ccc_vc(dades_c  |> tidyr::drop_na(),ry="value",rind="NHC",rmet="ratio",rtime="Visita",
+                 boot=TRUE,boot_param = TRUE, boot_ci = "empirical",nboot=500, covar = c("Equipo","obs"))
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est_U_AC <- cccUst(dades_c |> tidyr::drop_na(),ry="value",rmet="ratio",rtime="Visita")
+
+est_U_CC_06 <- cccUst(dades_c |> dplyr::filter(NHC %in% max_visit_06) |>
+                        dplyr::filter(Visita <= 6),
+                      ry="value",rmet="ratio",rtime="Visita")
+
+est_U_CC_09 <- cccUst(dades_c |> dplyr::filter(NHC %in% max_visit_09) |>
+                        dplyr::filter(Visita <= 9),
+                      ry="value",rmet="ratio",rtime="Visita")
+
+est_U_CC_11 <- cccUst(dades_c |> dplyr::filter(NHC %in% max_visit_11) |>
+                        dplyr::filter(Visita <= 11),
+                      ry="value",rmet="ratio",rtime="Visita")
+```
+
+```{r}
+#| eval: false
+#| echo: false
+est_bay <- ccc_vc_bayes(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita",correct = TRUE, n_iter = 10000 ,n_burnin = 1000)
+
+est_bay_covar <- ccc_vc_bayes(dades_c,ry="value",rind="NHC",rmet="ratio",rtime="Visita",correct = FALSE, n_iter = 10000 ,n_burnin = 1000, covar = c("Equipo","obs"))
+
+#est_lbay <- ccc_vc_bayes(dades_b,ry="value",rind="NHC",rmet="ratio",rtime="Visita",correct = TRUE,log_alpha = TRUE)
+```
+
+## Results
+
+```{r}
+#| echo: false
+rm(list = ls())
+load("./data/case_study2.RData")
+
+aux_ccc <- rstan::As.mcmc.list(est_bay$model, pars = "ccc")
+aux_gelman <- coda::gelman.diag(aux_ccc)
+aux_EFF <- coda::effectiveSize(aux_ccc)
+```
+
+First, a comment on the methods implementation and observed issues when computing the Concordance Correlation Coefficient. On their current implementation in the `cccrm` package, both the parametric bootstrap implementation from the `ccc_vc` function and the U-statistics estimate implemented in the `cccUst` function, showed problems handling missing observations. The issue for the parametric bootstrap case can be solved with dropping the missing observations and working with the available cases, while for the case of the U-statistics estimate, its implementation works under the assumption of equal number of observations per subject, and thus it requires a deeper review. Thus, I reflected the estimates for three levels of complete cases: those that went through at least 6 visits (106 patients), those that reached the 9th visit (72 patients), and those that reached the penultimate visit (only 17 patients). While the presence of a drop-out mechanism in the response variable should not by itself suggest any issue with the Concordance Correlation Coefficient estimate, in the degree that the non-observed samples (MNAR) or the omitted individuals (MAR) had shown a differential degree of concordance between T1Wi and TW2i, the Linear Mixed Models assumptions may not hold, and as it was used to provide the coefficients estimates these might also not hold.
+
+When reviewing the results, beyond the limitation of the U-statistics implementation, first is noticeable how the MAP estimate^[With 10000 iterations and 1000 of the used for burnin, the CCC parameter obtained a potential scale reduction factor of `r aux_gelman$psrf[,1]`, and an effective sample size of `r aux_EFF`.] falls lower than the estimates provided by the other methods, while showing comparable (but larger) bounds for the coefficient. This is also can be noticed in the estimate of the standard error provided, which is clearly larger for the Bayesian and the non-parametric bootstrap estimates, while the asymptotic method and the parametric bootstrap remain more consistent.
+
+```{r}
+#| warning: false
+#| echo: false
+aux <- est_N$ccc[1:4] |> rbind(est_AF$ccc[1:4]) |>
+  rbind(est_AF2$ccc[1:4]) |> rbind(est_AKG$ccc[1:4]) |>
+  rbind(est_BPB$ccc[1:4]) |> rbind(est_BPE$ccc[1:4]) |> 
+  rbind(est_NBPB$ccc[1:4]) |> rbind(est_NBPE$ccc[1:4]) |> 
+  rbind(est_U_AC) |> rbind(est_U_CC_06) |> rbind(est_U_CC_09) |>
+  rbind(est_U_CC_11) |> rbind(est_bay$ccc[1:4])
+
+rownames(aux) <- c("Asymptotic","Asymptotic (Fisher's Z)","Asymptotic (Z, m=2)",
+                   "Asymptotic (KG transf)","Param Boot BCa (AC)","Param Boot Emp (AC)",
+                   "Non-Param Boot BCa","Non-Param Boot Emp","U-stat (AC)","U-stat (CC-6)",
+                   "U-stat (CC-9)","U-stat (CC-11)","N-N Bayesian (MAP)")
+
+aux |> pander::pander()
+```
+
+```{r}
+#| echo: false
+rm(list = ls())
+load("./data/case_study2_covar.RData")
+```
+
+The inclusion of the two possible covariates, the practitioner and the machine used in the evaluation, while for all methods reduce the CCC point estimate, their inclusion as fixed effects do not dramatically shift the coefficient's confidence intervals. Given the experiment design it is up to discussion whether the standard inclusion of covariates as fixed effects was appropriate, or whether they should have been modeled as random effects.
+
+```{r}
+#| warning: false
+#| echo: false
+aux_covar <- est_N_covar$ccc[1:4] |> rbind(est_AF_covar$ccc[1:4]) |>
+  rbind(est_AF2_covar$ccc[1:4]) |> rbind(est_AKG_covar$ccc[1:4]) |>
+  rbind(est_BPB_covar$ccc[1:4]) |> rbind(est_BPE_covar$ccc[1:4]) |> 
+  rbind(est_NBPB_covar$ccc[1:4]) |> rbind(est_NBPE_covar$ccc[1:4]) |> 
+  rbind(est_bay_covar$ccc[1:4])
+
+rownames(aux_covar) <- c("Asymptotic","Asymptotic (Fisher's Z)","Asymptotic (Z, m=2)",
+                   "Asymptotic (KG transf)","Param Boot BCa (AC)","Param Boot Emp (AC)",
+                   "Non-Param Boot BCa","Non-Param Boot Emp","N-N Bayesian (MAP)")
+
+aux_covar |> pander::pander()
+```
+
+
+## Missingness pattern
+
+It felt rather important to review, for the adequacy of the application of the Complete Case Analysis for the concordance whether the dropout pattern in the dataset had any relationship with the degree of concordance between pairs, as if the observed pairs excluded in the complete case analysis presented a different degree of concordance (significantly more or less concordant) than the remaining pairs, we would be under a Missing At Random pattern, and the complete cases estimate would be biased. In order to review it, and with the awareness that the concordance was also time dependent, a comparison between the concordance of the pairs which were at the last visit of the subject versus the rest of the pairs was done for each visiting time. Then, the separation between the 95% confidence intervals at each time was assessed, with the only meaningful difference in Concordance happening at the fourth visit (where the nine subjects that dropped out had highly discordant samples). There was also no significant difference in concordance at each time when comparing the concordance of all available pairs versus the subset of pairs of continuing subjects, which would indicate that for this particular dataset the limitation of a Complete Case Analysis for the concordance correlation coefficient will not come from the missingness mechanism of the present dropout, but on the selection of the cut-off visit. To produce comparable estimates for methods that require complete cases to those under an Available Case framework, imputation strategies should be reviewed.
+
+```{r}
+#| eval: false
+#| echo: false
+dades_c2 <- dades_c |>
+  dplyr::mutate(NHC = as.factor(NHC), Visita = as.factor(Visita), ratio = as.factor(ratio))
+
+dades_aux <- dades_c2 |> dplyr::group_by(NHC) |> tidyr::expand(ratio,Visita) |>
+  dplyr::left_join(dades_c2) |> as.data.frame()
+
+aux_imp <-JointAI::lme_imp(fixed = value ~ ratio*Visita, data = dades_aux,random =  ~ (1 + ratio + Visita|NHC), n.iter = 1000, monitor_params = c(imps = TRUE))
+
+dades_imp <- JointAI::get_MIdat(aux_imp, m = 1, include = FALSE)
+
+est_U_imp <- cccrm::cccUst(dades_imp,ry="value",rmet="ratio",rtime="Visita")
+
+est_U_imp
+
+```
+
+```{r}
+#| warning: false
+#| echo: false
+#| eval: false
+
+# explore naniar
+aux_ccc_vis <- sapply(1:12, function(i){
+  dd <- dades_c |> dplyr::filter(Visita == i)
+  
+  res <- try(cccrm::ccc_vc(dd,ry="value",rind="NHC",rmet="ratio",boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)[[1]])
+  
+  if(inherits(res,"try-error")){
+    return(rep(NA,6))
+  }
+  
+  return(res)
+})
+
+aux_ccc_last_vis <- sapply(1:12, function(i){
+  last_visit <- dades_c |> dplyr::group_by(NHC) |>
+    dplyr::summarise(max_visit = max(Visita)) |> dplyr::filter(max_visit == i)
+  if(sum(last_visit)==0){
+    return(rep(NA,6))
+  }
+  dd <- dades_c |> dplyr::filter(Visita == i) |> dplyr::filter(NHC %in% last_visit$NHC)
+  res <- try(cccrm::ccc_vc(dd,ry="value",rind="NHC",rmet="ratio",boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)[[1]])
+  
+  if(inherits(res,"try-error")){
+    return(rep(NA,6))
+  }
+  
+  return(res)
+}) 
+
+aux_ccc_rest_vis <- sapply(1:12, function(i){
+  norm_visit <- dades_c |> dplyr::group_by(NHC) |>
+    dplyr::summarise(max_visit = max(Visita)) |> dplyr::filter(max_visit != i)
+  #if(sum(last_visit)==0){
+  #  return(rep(NA,6))
+  #}
+  
+  dd <- dades_c |> dplyr::filter(Visita == i) |> dplyr::filter(NHC %in% norm_visit$NHC)
+  res <- try(cccrm::ccc_vc(dd,ry="value",rind="NHC",rmet="ratio",boot=TRUE,boot_param = FALSE, boot_ci = "BCa",nboot=500)[[1]])
+  
+  if(inherits(res,"try-error")){
+    return(rep(NA,6))
+  }
+  
+  return(res)
+}) 
+
+last_vis <- sapply(1:12, function(i){
+  last_visit <- dades_c |> dplyr::group_by(NHC) |>
+    dplyr::summarise(max_visit = max(Visita)) |> dplyr::filter(max_visit == i)
+  
+  length(last_visit$NHC)
+})
+
+miss_vis <- sapply(1:12, function(i){
+  miss_visit <- dades_c |> dplyr::group_by(NHC) |>
+    dplyr::summarise(max_visit = max(Visita)) |> dplyr::filter(max_visit < i)
+  
+  length(miss_visit$NHC)
+})
+```
+
+
+```{r}
+#| warning: false
+#| echo: false
+
+rm(list = ls())
+load("./data/case_study2_miss.RData")
+# check bland-altman
+miss_dd <- data.frame(Visit = rep(1:12,3),
+                      Dropout = rep(c("All Visits","Last Visit","Other Visits"),each = 12),
+                      Missing = rep(miss_vis,3), Last_Visit = rep(last_vis,3),
+                      CCC = c(aux_ccc_vis[1,],aux_ccc_last_vis[1,],aux_ccc_rest_vis[1,]),
+                      CCC_L = c(aux_ccc_vis[2,],aux_ccc_last_vis[2,],aux_ccc_rest_vis[2,]),
+                      CCC_U = c(aux_ccc_vis[3,],aux_ccc_last_vis[3,],aux_ccc_rest_vis[3,]))
+
+aux_vis_tab <- miss_dd |> dplyr::filter(Dropout == "All Visits") |> dplyr::select(-Dropout,-CCC_L,-CCC_U)
+aux_vis_tab <- aux_vis_tab |> cbind(miss_dd |> dplyr::filter(Dropout == "Last Visit") |> 
+                                      dplyr::mutate(CCC_LV = CCC) |>
+                                      dplyr::select(CCC_LV)) #,CCC_L,CCC_U
+aux_vis_tab <- aux_vis_tab |> cbind(miss_dd |> dplyr::filter(Dropout == "Other Visits") |>
+                                      dplyr::mutate(CCC_Other = CCC) |>
+                                      dplyr::select(CCC_Other)) #,CCC_L,CCC_U
+
+sig_ccc <-sapply(1:12, function(i){
+  if(is.na(aux_ccc_last_vis[2,i])|is.na(aux_ccc_rest_vis[3,i])){
+    return(NA)
+  }
+  
+  if(aux_ccc_last_vis[3,i] < aux_ccc_rest_vis[2,i]){
+    return("Signficantly Less Concordant")
+  }
+  
+  if(is.na(aux_ccc_last_vis[3,i])|is.na(aux_ccc_rest_vis[2,i])){
+    return(NA)
+  }
+  
+  if(aux_ccc_last_vis[2,i] > aux_ccc_rest_vis[3,i]){
+    return("Signficantly More Concordant")
+  }
+  
+  return("No significant differences")
+  
+})
+
+sig_ccc2 <-sapply(1:12, function(i){
+  if(is.na(aux_ccc_vis[2,i])|is.na(aux_ccc_rest_vis[3,i])){
+    return(NA)
+  }
+  
+  if(aux_ccc_vis[3,i] < aux_ccc_rest_vis[2,i]){
+    return("Signficantly Less Concordant")
+  }
+  
+  if(is.na(aux_ccc_vis[3,i])|is.na(aux_ccc_rest_vis[2,i])){
+    return(NA)
+  }
+  
+  if(aux_ccc_vis[2,i] > aux_ccc_rest_vis[3,i]){
+    return("Signficantly More Concordant")
+  }
+  
+  return("No significant differences")
+  
+})
+
+pander::panderOptions('missing',"-")
+aux_vis_tab |> cbind(sig_ccc) |> pander::pander()
+
+miss_dd |> ggplot2::ggplot(ggplot2::aes(x = Visit, y = CCC, col = Dropout)) + ggplot2::geom_point() + ggplot2::geom_line() + ggplot2::geom_ribbon(ggplot2::aes(ymin=CCC_L, ymax=CCC_U, fill = Dropout), linetype=2, alpha=0.1) + ggplot2::scale_x_continuous(breaks = scales::breaks_pretty()) + see::theme_lucid()
+```
+

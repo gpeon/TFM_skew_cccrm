@@ -1,0 +1,29 @@
+# Motivation
+
+In many scenarios of statistical practice, as the comparison between alternative measuring techniques, which might be relevant for medical practice scenarios if the novel method had been shown to be less invasive than the current gold standard^[@gatti2024]; or in machine learning trying to gauge the effectiveness of a knowledge distillation strategy[^01_background-1]; or when trying to assess the degree of agreement of different raters[^01_background-2]; it is highly relevant to provide a measure of agreement consistent with the typology of the observed data, and assesses the variability and biases present accordingly. Within the nominal and ordinal scales, the use of the $\kappa$ index, and its weighted version, are widely used. They were first proposed in @cohen1960 and in @cohen1968 for the situation for binary and multiple classification. Both indices reflect the difference from observed agreement between the evaluation methods and the agreement by chance, with values close to 1 reflecting perfect agreement and values close to zero a poor degree of agreement. For the numerical scale, and based on an analysis of variance (ANOVA) model, @fisher1925 proposed the Intraclass Correlation Coefficient (ICC), as a measure of agreement between observers, which specifically can be interpreted and computed as a ratio between the variability in the responses due to the subjects and the total variability observed in the responses. Values close to one would indicate that the within-subjects variability has negligible impact on the response values, what would indicate high levels of agreement, while high method variability or high levels of unexplained variance would indicate instead little reliability between the methods. 
+
+[^01_background-1]: @mitra2022 .
+
+[^01_background-2]: @armour2024 .
+
+The underlying ANOVA model implicitly assumes when fitting a linear relationship between the observed values and the components, that the subject effects are independent and identically distributed and follow a normal distribution with zero mean and $\sigma^2$ variance, which is the same for the random errors, and both are mutually exclusive. The observer effects can be either considered as another normal random effect, if the expectation is that there are no systematic differences between any pair of methods, or as a fixed effect, with the added restriction of centrality. 
+
+Still, this coefficient intrinsically depends on the ANOVA conditions to hold, in order to be correctly specified and retain interpretability[^01_background-3]. Given its limitations, and the interest to extend the reliability study to replications, a mathematical comparable analogue was then proposed that was not withholden to the ANOVA assumptions.
+
+[^01_background-3]: @chen2008 .
+
+The concordance correlation coefficient (CCC) is one of the most well established concordance indices in the literature for the continuous scale, and since its initial proposal in @lin1989, it has been extended to multiple raters[^01_background-4], longitudinal[^01_background-5] and count data[^01_background-6], and its connection with the Intraclass Correlation Coefficient, and with the Cohen's weighted kappa has been explored.
+
+[^01_background-4]: @barnhart2002 .
+
+[^01_background-5]: @carrasco2013 .
+
+[^01_background-6]: @carrasco2009a .
+
+Given the distributional assumption of multivariate normality on which the estimate was conceived, this opens up to a potential and limiting issue of the CCC under this misspecification. Neither the coefficient's formula will be correct under a different distribution, nor the model strategy (if fitted with a Linear Mixed Model) will be valid. As such, it has been one of the most covered issues of the coefficient[^01_background-7] [^01_background-8] [^01_background-9], even if other misspecifications may also thread the model's validity (e.g., heteroscedasticity and non-linearity of residuals or the effect of a missingness mechanism).
+
+[^01_background-7]: @king2007 .
+
+[^01_background-8]: @feng2015 .
+
+[^01_background-9]: @feng2018 .

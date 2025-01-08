@@ -1,0 +1,1182 @@
+# Simulation & Methods
+
+## Methods
+
+Across the literature, four main approaches have been identified in order to obtain robust estimates of the Concordance Correlation Coefficient and its standard error: The U-statistics approach, which was initially proposed in @king2001 and then implemented in R with the @cccrm package; the Generalized Estimated Equations approach proposed in @barnhart2002; the Variance Components approach proposed in @carrasco2003 (same implementation as the U-statistics^[@carrasco2013]); and the Bayesian framework discussed in @feng2015 and implemented in the **agRee**^[@agRee] R package. Given the interest of working with repeated measures and longitudinal data, the GEE approach has not been evaluated (given that we currently lack an implementation that fulfills our requirements), while the bayesian framework has been adapted in order to handle a longitudinal response, and to not require external applications.
+
+The Variance Components approach has been split into two categories with regards to the estimation of the standard deviation of coefficient. The first one of those is the one initially presented in @lin1989 for the bivariate case ($m = 2$, which I'll be refering as the F2 transformation), taking advantage of the properties of the delta method, which then it could also be transformed, using Fisher's^[@fisher1925] z-transformation $z = \frac{1}{2} \ln(\frac{1+(m-1)\rho_{ccc}}{1-\rho_{ccc}})$, or to the modified Z-transformation by @konishi1987, $z = \sqrt\frac{m-1}{2m} \ln(\frac{1+(m-1)\rho_{ccc}}{1-\rho_{ccc}})$ which has a slight bias in the mean of $\frac{7-5m}{N\sqrt{18m(m-1)}}$ and a variance of $\frac{1}{N}$. This later transformation was recommended in @donner2002 for situations with more than two replicates ($m$) per individual. The second category refers to the usage of resampling techniques in order to obtain the estimates of the standard error and construct confidence intervals for the parameter. Within this field different resampling techniques have been proposed, as the jackniffe in @feng2013, but the analysis has been restricted to bootstrap implementations, very popular in the literature where they have been a common comparison to any proposal and obtaining consistently comparable results^[@barnhart2002]. Both parametric and non-parametric bootstrap^[@efron1979] implementations were considered, and for their confidence intervals both percentile and Bias-Corrected-and-Accelerated^[@efron1987] (Bca) were tested.
+
+The Bayesian implementation is based (the `ccc_vc_bayes` function, which is also available as a *.R* file) in the approach in @feng2015 (which also used the variance components estimate), which I extended to consider the longitudinal case and the non-longitudinal case with the subject-method interaction. I first developed the model all the random effects under a normal distributional assumption (information about the priors in the next section), and then I also considered the case where the subject effect followed a lognormal distribution (I extended the lognormal–normal linear mixed model proposed in @carrasco2007). Given that I expected that I already expected that the standard deviation of the log subject effect was going to be relatively small (\<\< generally smaller than 1), I decided to choose a $\sigma_{\ln_\alpha} \sim \Gamma(1.5,2)$ prior^[Based on a recommendation by Gelman. See <http://www.stat.columbia.edu/~gelman/presentations/wipnew2_handout.pdf>.] in order to avoid boundary issues close to 0. The function acts as a wrapper of the **brms**^[@brms] R package functions `stancode` and `standata`, which produce a linear mixed model *stan* file and adapt the data into a *stan* readable format, respectively, which are then internally edited to conform with the CCC definition as it can be seen in the *cccrm* R package (one of the key modifications that has to be made for the stan model to comply with the underlying LMM of the CCC derived through Variance Components is that the variance-covariance matrix of the random effects is assumed to be a block diagonal matrix with an identity condition).
+
+## Design
+
+Concordance in each simulation set has been evaluated at 5 levels (at 0.1, 0.3, 0.5, 0.7, and at 0.9), in order to evaluate whether there is some differential performance close to the coefficient's bounds. Each simulation contains one thousand replicates. In all cases the number of bootstrap resamples has been five hundred. The following estimation methods were evaluated: one asymptotic approach with four methods for interval estimation (No transformation, Fisher's transformation, F2 transformation, Konishi-Gupta's transformation), two bootstrap approaches (parametric and non-parametric) with two methods for interval estimation (empirical and BCa), the U-statistics approach, and a Bayesian Normal-Normal approach^[Its convergence was assessed during implementation through the Gelman-Rubin statistic.]. The four simulation sets included evaluating the default longitudinal case of two observers in two times plus two replicates per combination of observer and time (which leads to a complete design where each subject was evaluated eight times). The first two simulation sets were generated under a Normal-Normal model (both the subjects' effect and the response are normally distributed), with the objective to review the impact of sample size (30 vs 120 individuals). The third and fourth simulation sets reflect on the inclusion of a lightly and a heavily skewed subjects' effect through a Lognormal-Normal design in the overall estimation.
+
+For all simulation sets, the bayesian method's simulations were run on a ten thousand to one thousand iterations to burnin split, in order to produce a meaningful effective sample size for the coefficient. Nonetheless and upon review, while convergence is guaranteed, divergent transitions still have appeared. On further testing the problem seems to be solved by increasing the iterations to be discarded (burnin) to fifteen hundred.
+
+### First set
+
+*Longitudinal design. N-N model, 1000 simulations. 30 individuals with 2 observers, 2 times, and 2 replicates.*
+
+```{r, eval=FALSE, echo=FALSE}
+rm(list = ls())
+#load("./data/sim_01.Rdata")
+
+load("./sim_data/sim_30_1.Rdata")
+load("./sim_data/sim_30_2.Rdata")
+load("./sim_data/sim_30_np.Rdata")
+load("./sim_data/sim_30_3.Rdata")
+```
+
+```{r, eval=FALSE, echo=FALSE}
+## Asympt
+AF <- lapply(AF_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_09, function(i) i["coverage"]) |> unlist())
+
+AF_bias <- lapply(AF_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["bias"]) |> unlist())
+
+colnames(AF) <- colnames(AF_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF_t <- colSums(AF, na.rm = T)
+AF_NA <- colSums(is.na(AF))
+AF_tbias <- colSums(AF_bias, na.rm = T)
+AF_b <- AF_tbias/(1000-AF_NA)
+AF_cov <- AF_t/(1000-AF_NA)
+
+AF2 <- lapply(AF2_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF2_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_09, function(i) i["coverage"]) |> unlist())
+
+AF2_bias <- lapply(AF2_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["bias"]) |> unlist())
+
+
+colnames(AF2) <- colnames(AF2_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF2_t <- colSums(AF2, na.rm = T)
+AF2_NA <- colSums(is.na(AF2))
+AF2_tbias <- colSums(AF2_bias, na.rm = T)
+AF2_b <- AF2_tbias/(1000-AF2_NA)
+AF2_cov <- AF2_t/(1000-AF2_NA)
+
+AN <- lapply(AN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_09, function(i) i["coverage"]) |> unlist())
+
+AN_bias <- lapply(AN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["bias"]) |> unlist())
+
+colnames(AN) <- colnames(AN_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AN_t <- colSums(AN, na.rm = T)
+AN_NA <- colSums(is.na(AN))
+AN_tbias <- colSums(AN_bias, na.rm = T)
+AN_b <- AN_tbias/(1000-AN_NA)
+AN_cov <- AN_t/(1000-AN_NA)
+
+AKG <- lapply(AKG_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AKG_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_09, function(i) i["coverage"]) |> unlist())
+
+AKG_bias <- lapply(AKG_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["bias"]) |> unlist())
+
+colnames(AKG) <- colnames(AKG_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AKG_t <- colSums(AKG, na.rm = T)
+AKG_NA <- colSums(is.na(AKG))
+AKG_tbias <- colSums(AKG_bias, na.rm = T)
+AKG_b <- AKG_tbias/(1000-AKG_NA)
+AKG_cov <- AKG_t/(1000-AKG_NA)
+
+## Bayesian
+
+BN <- lapply(BN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_09, function(i) i["coverage"]) |> unlist())
+
+BN_bias <- lapply(BN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["bias"]) |> unlist())
+
+colnames(BN) <- colnames(BN_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BN_t <- colSums(BN, na.rm = T)
+BN_NA <- colSums(is.na(BN))
+BN_tbias <- colSums(BN_bias, na.rm = T)
+BN_b <- BN_tbias/(1000-BN_NA)
+BN_cov <- BN_t/(1000-BN_NA)
+
+
+### U
+
+U <- lapply(U_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(U_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_09, function(i) i["coverage"]) |> unlist())
+
+U_bias <- lapply(U_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(U_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_09, function(i) i["bias"]) |> unlist())
+
+colnames(U) <- colnames(U_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+U_t <- colSums(U, na.rm = T)
+U_NA <- colSums(is.na(U))
+U_tbias <- colSums(U_bias, na.rm = T)
+U_b <- U_tbias/(1000-U_NA)
+U_cov <- U_t/(1000-U_NA)
+
+## BOOTSTRAP
+
+BPB <- lapply(BPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_09, function(i) i["coverage"]) |> unlist())
+
+BPB_bias <- lapply(BPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPB) <- colnames(BPB_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPB_t <- colSums(BPB, na.rm = T)
+BPB_NA <- colSums(is.na(BPB))
+BPB_tbias <- colSums(BPB_bias, na.rm = T)
+BPB_b <- BPB_tbias/(1000-BPB_NA)
+BPB_cov <- BPB_t/(1000-BPB_NA)
+
+BPE <- lapply(BPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_09, function(i) i["coverage"]) |> unlist())
+
+BPE_bias <- lapply(BPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPE) <- colnames(BPE_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPE_t <- colSums(BPE, na.rm = T)
+BPE_NA <- colSums(is.na(BPE))
+BPE_tbias <- colSums(BPE_bias, na.rm = T)
+BPE_b <- BPE_tbias/(1000-BPE_NA)
+BPE_cov <- BPE_t/(1000-BPE_NA)
+
+## Non-para boot
+
+NBPB <- lapply(NBPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_09, function(i) i["coverage"]) |> unlist())
+
+NBPB_bias <- lapply(NBPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPB) <- colnames(NBPB_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPB_t <- colSums(NBPB, na.rm = T)
+NBPB_NA <- colSums(is.na(NBPB))
+NBPB_tbias <- colSums(NBPB_bias, na.rm = T)
+NBPB_b <- NBPB_tbias/(1000-NBPB_NA)
+NBPB_cov <- NBPB_t/(1000-NBPB_NA)
+
+NBPE <- lapply(NBPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_09, function(i) i["coverage"]) |> unlist())
+
+NBPE_bias <- lapply(NBPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPE) <- colnames(NBPE_bias)  <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPE_t <- colSums(NBPE, na.rm = T)
+NBPE_NA <- colSums(is.na(NBPE))
+NBPE_tbias <- colSums(NBPE_bias, na.rm = T)
+NBPE_b <- NBPE_tbias/(1000-NBPE_NA)
+NBPE_cov <- NBPE_t/(1000-NBPE_NA)
+```
+
+```{r}
+#| echo: false
+
+#aux_1_30 <- AN_cov |> cbind(AF_cov) |> cbind(AF2_cov) |> cbind(AKG_cov) |>
+#  cbind(BN_cov) |> cbind(U_cov) |> cbind(BPB_cov) |> cbind(BPE_cov) |>
+#  cbind(NBPB_cov) |> cbind(NBPE_cov) 
+#
+#aux_NA_30 <- AN_NA |> cbind(AF_NA) |> cbind(AF2_NA) |> cbind(AKG_NA) |>
+#  cbind(BN_NA) |> cbind(U_NA) |> cbind(BPB_NA) |> cbind(BPE_NA) |>
+#  cbind(NBPB_NA) |> cbind(NBPE_NA) /1000
+#aux_b_30 <- AN_b |> cbind(AF_b) |> cbind(AF2_b) |> cbind(AKG_b) |>
+#  cbind(BN_b) |> cbind(U_b) |> cbind(BPB_b) |> cbind(BPE_b) |>
+#  cbind(NBPB_b) |> cbind(NBPE_b) |> round(3)
+#
+#saveRDS(aux_b_30, file = "./data/aux_b_30.RDS")
+#
+#saveRDS(aux_1_30, file = "./data/aux_1_30.RDS")
+#saveRDS(aux_NA_30, file = "./data/aux_NA_30.RDS")
+
+aux_1_30 <- readRDS(file = "./data/aux_1_30.RDS")
+
+aa <- aux_1_30*100
+
+colnames(aa) <- gsub("_cov","",colnames(aa))
+
+aa |> pander::pander(round = 3, caption = "Coverage (%) of each method at each concordance level.")
+```
+
+*AN: Asymptotic method (No transformation), AF: Asymptotic (Fisher's transformation), AF2: Asymptotic (F2 transformation), AKG: Asymptotic (Konishi-Gupta transformation), BN: Bayesian Normal estimate, U: U-statistics estimate, BPB: Parametric Bootstrap (BCa), BPE: Parametric Bootstrap (Empirical), NPBP: Non-parametric Bootstrap (BCa), NPBE: Non-parametric Bootstrap (Empirical).*
+
+Every confidence interval method based on the asymptotic estimate achieved the nominal coverage, while for the bootstrap approaches, which resample the asymptotic estimate, only under the Bias Corrected and accelerated method the nominal coverage was achieved.  Both the robust U-statistics approach and the Bayesian N-N method did not fail to produce an estimate in any of the simulations, nonetheless, showed by far the worst coverage while the latter was the best performer. Comparatively the asymptotic model failed in 5% of the simulations for the 0.1 CCC and in 1% of the simulations for the 0.9 CCC. The bootstrap methods had a higher degree of convergence failure across the board, only being comparable at 0.1  with a failure rate of 5%, which grew to 22% failure rate for a CCC of 0.9. The non-parametric approach with the available version on the package failed at a larger rate, which will be updated. The main cause of the failures of the methods that relied on the asymptotic estimate were due to failures of the `lme` model in computing the Hessian matrix.
+
+### Second set
+
+*Longitudinal design. N-N model, 1000 simulations. 120 individuals.*
+
+```{r, eval=FALSE, echo=FALSE}
+rm(list = ls())
+load("./sim_data/sim_120_1.Rdata")
+load("./sim_data/sim_120_2.Rdata")
+load("./sim_data/sim_120_nb.Rdata")
+load("./sim_data/sim_120_3.Rdata")
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
+## Asympt
+AF <- lapply(AF_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_09, function(i) i["coverage"]) |> unlist())
+
+AF_bias <- lapply(AF_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["bias"]) |> unlist())
+
+colnames(AF) <- colnames(AF_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF_t <- colSums(AF, na.rm = T)
+AF_NA <- colSums(is.na(AF))
+AF_tbias <- colSums(AF_bias, na.rm = T)
+AF_b <- AF_tbias/(1000-AF_NA)
+AF_cov <- AF_t/(1000-AF_NA)
+
+AF2 <- lapply(AF2_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF2_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_09, function(i) i["coverage"]) |> unlist())
+
+AF2_bias <- lapply(AF2_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["bias"]) |> unlist())
+
+
+colnames(AF2) <- colnames(AF2_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF2_t <- colSums(AF2, na.rm = T)
+AF2_NA <- colSums(is.na(AF2))
+AF2_tbias <- colSums(AF2_bias, na.rm = T)
+AF2_b <- AF2_tbias/(1000-AF2_NA)
+AF2_cov <- AF2_t/(1000-AF2_NA)
+
+AN <- lapply(AN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_09, function(i) i["coverage"]) |> unlist())
+
+AN_bias <- lapply(AN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["bias"]) |> unlist())
+
+colnames(AN) <- colnames(AN_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AN_t <- colSums(AN, na.rm = T)
+AN_NA <- colSums(is.na(AN))
+AN_tbias <- colSums(AN_bias, na.rm = T)
+AN_b <- AN_tbias/(1000-AN_NA)
+AN_cov <- AN_t/(1000-AN_NA)
+
+AKG <- lapply(AKG_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AKG_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_09, function(i) i["coverage"]) |> unlist())
+
+AKG_bias <- lapply(AKG_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["bias"]) |> unlist())
+
+colnames(AKG) <- colnames(AKG_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AKG_t <- colSums(AKG, na.rm = T)
+AKG_NA <- colSums(is.na(AKG))
+AKG_tbias <- colSums(AKG_bias, na.rm = T)
+AKG_b <- AKG_tbias/(1000-AKG_NA)
+AKG_cov <- AKG_t/(1000-AKG_NA)
+
+## Bayesian
+
+BN <- lapply(BN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_09, function(i) i["coverage"]) |> unlist())
+
+BN_bias <- lapply(BN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["bias"]) |> unlist())
+
+colnames(BN) <- colnames(BN_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BN_t <- colSums(BN, na.rm = T)
+BN_NA <- colSums(is.na(BN))
+BN_tbias <- colSums(BN_bias, na.rm = T)
+BN_b <- BN_tbias/(1000-BN_NA)
+BN_cov <- BN_t/(1000-BN_NA)
+
+
+### U
+
+U <- lapply(U_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(U_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_09, function(i) i["coverage"]) |> unlist())
+
+U_bias <- lapply(U_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(U_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_09, function(i) i["bias"]) |> unlist())
+
+colnames(U) <- colnames(U_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+U_t <- colSums(U, na.rm = T)
+U_NA <- colSums(is.na(U))
+U_tbias <- colSums(U_bias, na.rm = T)
+U_b <- U_tbias/(1000-U_NA)
+U_cov <- U_t/(1000-U_NA)
+
+## BOOTSTRAP
+
+BPB <- lapply(BPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_09, function(i) i["coverage"]) |> unlist())
+
+BPB_bias <- lapply(BPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPB) <- colnames(BPB_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPB_t <- colSums(BPB, na.rm = T)
+BPB_NA <- colSums(is.na(BPB))
+BPB_tbias <- colSums(BPB_bias, na.rm = T)
+BPB_b <- BPB_tbias/(1000-BPB_NA)
+BPB_cov <- BPB_t/(1000-BPB_NA)
+
+BPE <- lapply(BPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_09, function(i) i["coverage"]) |> unlist())
+
+BPE_bias <- lapply(BPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPE) <- colnames(BPE_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPE_t <- colSums(BPE, na.rm = T)
+BPE_NA <- colSums(is.na(BPE))
+BPE_tbias <- colSums(BPE_bias, na.rm = T)
+BPE_b <- BPE_tbias/(1000-BPE_NA)
+BPE_cov <- BPE_t/(1000-BPE_NA)
+
+## Non-para boot
+
+NBPB <- lapply(NBPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_09, function(i) i["coverage"]) |> unlist())
+
+NBPB_bias <- lapply(NBPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPB) <- colnames(NBPB_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPB_t <- colSums(NBPB, na.rm = T)
+NBPB_NA <- colSums(is.na(NBPB))
+NBPB_tbias <- colSums(NBPB_bias, na.rm = T)
+NBPB_b <- NBPB_tbias/(1000-NBPB_NA)
+NBPB_cov <- NBPB_t/(1000-NBPB_NA)
+
+NBPE <- lapply(NBPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_09, function(i) i["coverage"]) |> unlist())
+
+NBPE_bias <- lapply(NBPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPE) <- colnames(NBPE_bias)  <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPE_t <- colSums(NBPE, na.rm = T)
+NBPE_NA <- colSums(is.na(NBPE))
+NBPE_tbias <- colSums(NBPE_bias, na.rm = T)
+NBPE_b <- NBPE_tbias/(1000-NBPE_NA)
+NBPE_cov <- NBPE_t/(1000-NBPE_NA)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+aux_1_120 <- AN_cov |> cbind(AF_cov) |> cbind(AF2_cov) |> cbind(AKG_cov) |>
+  cbind(BN_cov) |> cbind(U_cov) |> cbind(BPB_cov) |> cbind(BPE_cov) |>
+  cbind(NBPB_cov) |> cbind(NBPE_cov) 
+
+aux_NA_120 <- AN_NA |> cbind(AF_NA) |> cbind(AF2_NA) |> cbind(AKG_NA) |>
+  cbind(BN_NA) |> cbind(U_NA) |> cbind(BPB_NA) |> cbind(BPE_NA) |>
+  cbind(NBPB_NA) |> cbind(NBPE_NA) /1000
+
+aux_b_120 <- AN_b |> cbind(AF_b) |> cbind(AF2_b) |> cbind(AKG_b) |>
+  cbind(BN_b) |> cbind(U_b) |> cbind(BPB_b) |> cbind(BPE_b) |>
+  cbind(NBPB_b) |> cbind(NBPE_b) |> round(3)
+
+saveRDS(aux_1_120, file = "./data/aux_1_120.RDS")
+saveRDS(aux_NA_120, file = "./data/aux_NA_120.RDS")
+saveRDS(aux_b_120, file = "./data/aux_b_120.RDS")
+```
+
+```{r}
+#| echo: false
+aux_1_120 <- readRDS(file = "./data/aux_1_120.RDS")
+
+aa <- aux_1_120*100
+
+colnames(aa) <- gsub("_cov","",colnames(aa))
+
+aa |> pander::pander(round = 3, caption = "Coverage (%) of each method at each concordance level.")
+```
+
+Under this set the U-statistics method still does not achieve its nominal coverage while the empirical bootstrap estimates show a minor improvement (even if they still fail to reach a single time the nominal coverage). The bootstrap approaches showed high levels of failure rates close to the bounds (between 11 and 13% at 0.1, and between 66% and 69% at 0.9), an issue that was later addressed in the implementation.
+
+
+### Third set
+
+*LN-N model, 1000 simulations. 30 individuals.*
+
+For the remaining two simulation sets, the failure rate of the bootstrap implementation was meaningfully addressed (at 0.1 the failure rate dropped to 5% and at 0.9 it dropped to 22%, see Appendix), which nonetheless still remains as a key issue regarding this implementation. The inclusion of the lognormal random effect (strongly skewed itself, but with the response still being lightly skewed) does not seem to meaningfully affect the methods' performance, whose coverages are comparable to those seen previously and carrying the same problems.
+
+```{r, eval=FALSE, echo=FALSE}
+rm(list = ls())
+load("./sim_data/sim_l30_1.Rdata")
+load("./sim_data/sim_l30_2.Rdata")
+load("./sim_data/sim_l30_np.Rdata")
+load("./sim_data/sim_l30_3.Rdata")
+```
+
+```{r, eval=FALSE, echo=FALSE}
+## Asympt
+AF <- lapply(AF_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_09, function(i) i["coverage"]) |> unlist())
+
+AF_bias <- lapply(AF_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["bias"]) |> unlist())
+
+AF_skew <- lapply(AF_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AF) <- colnames(AF_bias) <- colnames(AF_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF_t <- colSums(AF, na.rm = T)
+AF_NA <- colSums(is.na(AF))
+AF_tbias <- colSums(AF_bias, na.rm = T)
+AF_b <- AF_tbias/(1000-AF_NA)
+AF_tskew <- colSums(AF_skew, na.rm = T)
+AF_s <- AF_tskew/(1000-AF_NA)
+AF_cov <- AF_t/(1000-AF_NA)
+
+AF2 <- lapply(AF2_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF2_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_09, function(i) i["coverage"]) |> unlist())
+
+AF2_bias <- lapply(AF2_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["bias"]) |> unlist())
+
+AF2_skew <- lapply(AF2_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AF2) <- colnames(AF2_bias) <- colnames(AF2_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF2_t <- colSums(AF2, na.rm = T)
+AF2_NA <- colSums(is.na(AF2))
+AF2_tbias <- colSums(AF2_bias, na.rm = T)
+AF2_b <- AF2_tbias/(1000-AF2_NA)
+AF2_tskew <- colSums(AF2_skew, na.rm = T)
+AF2_s <- AF2_tskew/(1000-AF2_NA)
+AF2_cov <- AF2_t/(1000-AF2_NA)
+
+AN <- lapply(AN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_09, function(i) i["coverage"]) |> unlist())
+
+AN_bias <- lapply(AN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["bias"]) |> unlist())
+
+AN_skew <- lapply(AN_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AN) <- colnames(AN_bias) <- colnames(AN_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AN_t <- colSums(AN, na.rm = T)
+AN_NA <- colSums(is.na(AN))
+AN_tbias <- colSums(AN_bias, na.rm = T)
+AN_b <- AN_tbias/(1000-AN_NA)
+AN_tskew <- colSums(AN_skew, na.rm = T)
+AN_s <- AN_tskew/(1000-AN_NA)
+AN_cov <- AN_t/(1000-AN_NA)
+
+AKG <- lapply(AKG_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AKG_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_09, function(i) i["coverage"]) |> unlist())
+
+AKG_bias <- lapply(AKG_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["bias"]) |> unlist())
+
+AKG_skew <- lapply(AKG_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AKG) <- colnames(AKG_bias) <- colnames(AKG_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AKG_t <- colSums(AKG, na.rm = T)
+AKG_NA <- colSums(is.na(AKG))
+AKG_tbias <- colSums(AKG_bias, na.rm = T)
+AKG_b <- AKG_tbias/(1000-AKG_NA)
+AKG_tskew <- colSums(AKG_skew, na.rm = T)
+AKG_s <- AKG_tskew/(1000-AKG_NA)
+AKG_cov <- AKG_t/(1000-AKG_NA)
+
+## Bayesian
+
+BN <- lapply(BN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_09, function(i) i["coverage"]) |> unlist())
+
+BN_bias <- lapply(BN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["bias"]) |> unlist())
+
+BN_skew <- lapply(BN_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["skewness"]) |> unlist())
+
+colnames(BN) <- colnames(BN_bias) <- colnames(BN_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BN_t <- colSums(BN, na.rm = T)
+BN_NA <- colSums(is.na(BN))
+BN_tbias <- colSums(BN_bias, na.rm = T)
+BN_b <- BN_tbias/(1000-BN_NA)
+BN_tskew <- colSums(BN_skew, na.rm = T)
+BN_s <- BN_tskew/(1000-BN_NA)
+BN_cov <- BN_t/(1000-BN_NA)
+
+
+### U
+
+U <- lapply(U_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(U_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_09, function(i) i["coverage"]) |> unlist())
+
+U_bias <- lapply(U_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(U_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_09, function(i) i["bias"]) |> unlist())
+
+colnames(U) <- colnames(U_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+U_t <- colSums(U, na.rm = T)
+U_NA <- colSums(is.na(U))
+U_tbias <- colSums(U_bias, na.rm = T)
+U_b <- U_tbias/(1000-U_NA)
+U_cov <- U_t/(1000-U_NA)
+
+## BOOTSTRAP
+
+BPB <- lapply(BPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_09, function(i) i["coverage"]) |> unlist())
+
+BPB_bias <- lapply(BPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPB) <- colnames(BPB_bias) <-  c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPB_t <- colSums(BPB, na.rm = T)
+BPB_NA <- colSums(is.na(BPB))
+BPB_tbias <- colSums(BPB_bias, na.rm = T)
+BPB_b <- BPB_tbias/(1000-BPB_NA)
+BPB_cov <- BPB_t/(1000-BPB_NA)
+
+BPE <- lapply(BPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_09, function(i) i["coverage"]) |> unlist())
+
+BPE_bias <- lapply(BPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(BPE) <- colnames(BPE_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPE_t <- colSums(BPE, na.rm = T)
+BPE_NA <- colSums(is.na(BPE))
+BPE_tbias <- colSums(BPE_bias, na.rm = T)
+BPE_b <- BPE_tbias/(1000-BPE_NA)
+BPE_cov <- BPE_t/(1000-BPE_NA)
+
+## Non-para boot
+
+NBPB <- lapply(NBPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_09, function(i) i["coverage"]) |> unlist())
+
+NBPB_bias <- lapply(NBPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPB) <- colnames(NBPB_bias)<- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPB_t <- colSums(NBPB, na.rm = T)
+NBPB_NA <- colSums(is.na(NBPB))
+NBPB_tbias <- colSums(NBPB_bias, na.rm = T)
+NBPB_b <- NBPB_tbias/(1000-NBPB_NA)
+NBPB_cov <- NBPB_t/(1000-NBPB_NA)
+
+NBPE <- lapply(NBPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_09, function(i) i["coverage"]) |> unlist())
+
+NBPE_bias <- lapply(NBPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_09, function(i) i["bias"]) |> unlist())
+
+colnames(NBPE) <- colnames(NBPE_bias) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPE_t <- colSums(NBPE, na.rm = T)
+NBPE_NA <- colSums(is.na(NBPE))
+NBPE_tbias <- colSums(NBPE_bias, na.rm = T)
+NBPE_b <- NBPE_tbias/(1000-NBPE_NA)
+NBPE_cov <- NBPE_t/(1000-NBPE_NA)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+aux_1_l30 <- AN_cov |> cbind(AF_cov) |> cbind(AF2_cov) |> cbind(AKG_cov) |>
+  cbind(BN_cov) |> cbind(U_cov) |> cbind(BPB_cov) |> cbind(BPE_cov) |>
+  cbind(NBPB_cov) |> cbind(NBPE_cov) 
+
+aux_NA_l30 <- AN_NA |> cbind(AF_NA) |> cbind(AF2_NA) |> cbind(AKG_NA) |>
+  cbind(BN_NA) |> cbind(U_NA) |> cbind(BPB_NA) |> cbind(BPE_NA) |>
+  cbind(NBPB_NA) |> cbind(NBPE_NA) /1000
+
+aux_b_l30 <- AN_b |> cbind(AF_b) |> cbind(AF2_b) |> cbind(AKG_b) |>
+  cbind(BN_b) |> cbind(U_b) |> cbind(BPB_b) |> cbind(BPE_b) |>
+  cbind(NBPB_b) |> cbind(NBPE_b) |> round(3)
+
+aux_s_l30 <- AN_s |> cbind(AF_s) |> cbind(AF2_s) |> cbind(AKG_s) |>
+  cbind(BN_s) |> round(3)
+
+saveRDS(aux_1_l30, file = "./data/aux_1_l30.RDS")
+saveRDS(aux_NA_l30, file = "./data/aux_NA_l30.RDS")
+saveRDS(aux_b_l30, file = "./data/aux_b_l30.RDS")
+saveRDS(aux_s_l30, file = "./data/aux_s_l30.RDS")
+```
+
+```{r}
+#| echo: false
+aux_1_l30 <- readRDS(file = "./data/aux_1_l30.RDS")
+
+aa <- aux_1_l30*100
+
+colnames(aa) <- gsub("_cov","",colnames(aa))
+
+aa |> pander::pander(round = 3, caption = "Coverage (%) of each method at each concordance level.")
+```
+
+### Fourth set
+
+*Longitudinal design. LN-N model, 1000 simulations. 30 individuals.*
+
+For this final set the skewness of the lognormal effect was increased as such that the response was also heavily skewed (see Appendix for a detailed explanation on the procedure). All methods fail across the board in reaching the nominal coverage, but both the Bayesian and the non-parametric bootstrap Bca showed better coverage than the rest.
+
+```{r}
+#| echo: false
+rm(list = ls())
+load("./sim_data/sim_ll30_1.Rdata")
+load("./sim_data/sim_ll30_2.Rdata")
+load("./sim_data/sim_ll30_3.Rdata")
+load("./sim_data/sim_ll30_nb.Rdata")
+load("./sim_data/sim_ll30_4.Rdata")
+```
+
+```{r, eval=FALSE, echo=FALSE}
+## Asympt
+AF <- lapply(AF_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF_09, function(i) i["coverage"]) |> unlist())
+
+AF_bias <- lapply(AF_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["bias"]) |> unlist())
+
+AF_skew <- lapply(AF_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AF_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AF) <- colnames(AF_bias) <- colnames(AF_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF_t <- colSums(AF, na.rm = T)
+AF_NA <- colSums(is.na(AF))
+AF_tbias <- colSums(AF_bias, na.rm = T)
+AF_b <- AF_tbias/(1000-AF_NA)
+AF_tskew <- colSums(AF_skew, na.rm = T)
+AF_s <- AF_tskew/(1000-AF_NA)
+AF_cov <- AF_t/(1000-AF_NA)
+
+AF2 <- lapply(AF2_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AF2_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AF2_09, function(i) i["coverage"]) |> unlist())
+
+AF2_bias <- lapply(AF2_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["bias"]) |> unlist())
+
+AF2_skew <- lapply(AF2_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AF2_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AF2_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AF2) <- colnames(AF2_bias) <- colnames(AF2_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AF2_t <- colSums(AF2, na.rm = T)
+AF2_NA <- colSums(is.na(AF2))
+AF2_tbias <- colSums(AF2_bias, na.rm = T)
+AF2_b <- AF2_tbias/(1000-AF2_NA)
+AF2_tskew <- colSums(AF2_skew, na.rm = T)
+AF2_s <- AF2_tskew/(1000-AF2_NA)
+AF2_cov <- AF2_t/(1000-AF2_NA)
+
+AN <- lapply(AN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AN_09, function(i) i["coverage"]) |> unlist())
+
+AN_bias <- lapply(AN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["bias"]) |> unlist())
+
+AN_skew <- lapply(AN_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AN_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AN_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AN) <- colnames(AN_bias) <- colnames(AN_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AN_t <- colSums(AN, na.rm = T)
+AN_NA <- colSums(is.na(AN))
+AN_tbias <- colSums(AN_bias, na.rm = T)
+AN_b <- AN_tbias/(1000-AN_NA)
+AN_tskew <- colSums(AN_skew, na.rm = T)
+AN_s <- AN_tskew/(1000-AN_NA)
+AN_cov <- AN_t/(1000-AN_NA)
+
+AKG <- lapply(AKG_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(AKG_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(AKG_09, function(i) i["coverage"]) |> unlist())
+
+AKG_bias <- lapply(AKG_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["bias"]) |> unlist())
+
+AKG_skew <- lapply(AKG_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(AKG_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(AKG_09, function(i) i["skewness"]) |> unlist())
+
+colnames(AKG) <- colnames(AKG_bias) <- colnames(AKG_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+AKG_t <- colSums(AKG, na.rm = T)
+AKG_NA <- colSums(is.na(AKG))
+AKG_tbias <- colSums(AKG_bias, na.rm = T)
+AKG_b <- AKG_tbias/(1000-AKG_NA)
+AKG_tskew <- colSums(AKG_skew, na.rm = T)
+AKG_s <- AKG_tskew/(1000-AKG_NA)
+AKG_cov <- AKG_t/(1000-AKG_NA)
+
+## Bayesian
+
+BN <- lapply(BN_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BN_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BN_09, function(i) i["coverage"]) |> unlist())
+
+BN_bias <- lapply(BN_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["bias"]) |> unlist())
+
+BN_skew <- lapply(BN_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(BN_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BN_09, function(i) i["skewness"]) |> unlist())
+
+colnames(BN) <- colnames(BN_bias) <- colnames(BN_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BN_t <- colSums(BN, na.rm = T)
+BN_NA <- colSums(is.na(BN))
+BN_tbias <- colSums(BN_bias, na.rm = T)
+BN_b <- BN_tbias/(1000-BN_NA)
+BN_tskew <- colSums(BN_skew, na.rm = T)
+BN_s <- BN_tskew/(1000-BN_NA)
+BN_cov <- BN_t/(1000-BN_NA)
+
+
+### U
+
+U <- lapply(U_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(U_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(U_09, function(i) i["coverage"]) |> unlist())
+
+U_bias <- lapply(U_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(U_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(U_09, function(i) i["bias"]) |> unlist())
+
+U_skew <- lapply(U_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(U_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(U_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(U_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(U_09, function(i) i["skewness"]) |> unlist())
+
+colnames(U) <- colnames(U_bias) <- colnames(U_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+U_t <- colSums(U, na.rm = T)
+U_NA <- colSums(is.na(U))
+U_tbias <- colSums(U_bias, na.rm = T)
+U_b <- U_tbias/(1000-U_NA)
+U_tskew <- colSums(U_skew, na.rm = T)
+U_s <- U_tskew/(1000-U_NA)
+U_cov <- U_t/(1000-U_NA)
+
+## BOOTSTRAP
+
+BPB <- lapply(BPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPB_09, function(i) i["coverage"]) |> unlist())
+
+BPB_bias <- lapply(BPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPB_09, function(i) i["bias"]) |> unlist())
+
+BPB_skew <- lapply(BPB_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(BPB_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPB_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPB_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPB_09, function(i) i["skewness"]) |> unlist())
+
+colnames(BPB) <- colnames(BPB_bias) <- colnames(BPB_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPB_t <- colSums(BPB, na.rm = T)
+BPB_NA <- colSums(is.na(BPB))
+BPB_tbias <- colSums(BPB_bias, na.rm = T)
+BPB_b <- BPB_tbias/(1000-BPB_NA)
+BPB_tskew <- colSums(BPB_skew, na.rm = T)
+BPB_s <- BPB_tskew/(1000-BPB_NA)
+BPB_cov <- BPB_t/(1000-BPB_NA)
+
+BPE <- lapply(BPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(BPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(BPE_09, function(i) i["coverage"]) |> unlist())
+
+BPE_bias <- lapply(BPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(BPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(BPE_09, function(i) i["bias"]) |> unlist())
+
+BPE_skew <- lapply(BPE_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(BPE_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPE_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPE_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(BPE_09, function(i) i["skewness"]) |> unlist())
+
+colnames(BPE) <- colnames(BPE_bias) <- colnames(BPE_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+BPE_t <- colSums(BPE, na.rm = T)
+BPE_NA <- colSums(is.na(BPE))
+BPE_tbias <- colSums(BPE_bias, na.rm = T)
+BPE_b <- BPE_tbias/(1000-BPE_NA)
+BPE_tskew <- colSums(BPE_skew, na.rm = T)
+BPE_s <- BPE_tskew/(1000-BPE_NA)
+BPE_cov <- BPE_t/(1000-BPE_NA)
+
+## Non-para boot
+
+NBPB <- lapply(NBPB_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPB_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPB_09, function(i) i["coverage"]) |> unlist())
+
+NBPB_bias <- lapply(NBPB_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPB_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPB_09, function(i) i["bias"]) |> unlist())
+
+NBPB_skew <- lapply(NBPB_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(NBPB_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPB_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPB_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPB_09, function(i) i["skewness"]) |> unlist())
+
+colnames(NBPB) <- colnames(NBPB_bias) <- colnames(NBPB_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPB_t <- colSums(NBPB, na.rm = T)
+NBPB_NA <- colSums(is.na(NBPB))
+NBPB_tbias <- colSums(NBPB_bias, na.rm = T)
+NBPB_b <- NBPB_tbias/(1000-NBPB_NA)
+NBPB_tskew <- colSums(NBPB_skew, na.rm = T)
+NBPB_s <- NBPB_tskew/(1000-NBPB_NA)
+NBPB_cov <- NBPB_t/(1000-NBPB_NA)
+
+NBPE <- lapply(NBPE_01, function(i) i["coverage"]) |> unlist() |>
+  cbind(lapply(NBPE_03, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_05, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_07, function(i) i["coverage"]) |> unlist()) |>
+  cbind(lapply(NBPE_09, function(i) i["coverage"]) |> unlist())
+
+NBPE_bias <- lapply(NBPE_01, function(i) i["bias"]) |> unlist() |>
+     cbind(lapply(NBPE_03, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_05, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_07, function(i) i["bias"]) |> unlist()) |>
+     cbind(lapply(NBPE_09, function(i) i["bias"]) |> unlist())
+
+NBPE_skew <- lapply(NBPE_01, function(i) i["skewness"]) |> unlist() |>
+     cbind(lapply(NBPE_03, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPE_05, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPE_07, function(i) i["skewness"]) |> unlist()) |>
+     cbind(lapply(NBPE_09, function(i) i["skewness"]) |> unlist())
+
+colnames(NBPE) <- colnames(NBPE_bias) <- colnames(NBPE_skew) <- c("CCC_01","CCC_03","CCC_05","CCC_07","CCC_09")
+
+NBPE_t <- colSums(NBPE, na.rm = T)
+NBPE_NA <- colSums(is.na(NBPE))
+NBPE_tbias <- colSums(NBPE_bias, na.rm = T)
+NBPE_b <- NBPE_tbias/(1000-NBPE_NA)
+NBPE_tskew <- colSums(NBPE_skew, na.rm = T)
+NBPE_s <- NBPE_tskew/(1000-NBPE_NA)
+NBPE_cov <- NBPE_t/(1000-NBPE_NA)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+aux_1_ll30 <- AN_cov |> cbind(AF_cov) |> cbind(AF2_cov) |> cbind(AKG_cov) |>
+  cbind(BN_cov) |> cbind(U_cov) |> cbind(BPB_cov) |> cbind(BPE_cov) |>
+  cbind(NBPB_cov) |> cbind(NBPE_cov) 
+
+aux_NA_ll30 <- AN_NA |> cbind(AF_NA) |> cbind(AF2_NA) |> cbind(AKG_NA) |>
+  cbind(BN_NA) |> cbind(U_NA) |> cbind(BPB_NA) |> cbind(BPE_NA) |>
+  cbind(NBPB_NA) |> cbind(NBPE_NA) /1000
+
+aux_b_ll30 <- AN_b |> cbind(AF_b) |> cbind(AF2_b) |> cbind(AKG_b) |>
+  cbind(BN_b) |> cbind(U_b) |> cbind(BPB_b) |> cbind(BPE_b) |>
+  cbind(NBPB_b) |> cbind(NBPE_b) |> round(3)
+
+aux_s_ll30 <- AN_s |> cbind(AF_s) |> cbind(AF2_s) |> cbind(AKG_s) |>
+  cbind(BN_s) |> cbind(U_s) |> cbind(BPB_s) |> cbind(BPE_s) |>
+  cbind(NBPB_s) |> cbind(NBPE_s) |> round(3)
+
+saveRDS(aux_1_ll30, file = "./data/aux_1_ll30.RDS")
+saveRDS(aux_NA_ll30, file = "./data/aux_NA_ll30.RDS")
+saveRDS(aux_b_ll30, file = "./data/aux_b_ll30.RDS")
+saveRDS(aux_s_ll30, file = "./data/aux_s_ll30.RDS")
+```
+
+```{r}
+#| echo: false
+aux_1_ll30 <- readRDS(file = "./data/aux_1_ll30.RDS")
+
+aa <- aux_1_ll30*100
+
+colnames(aa) <- gsub("_cov","",colnames(aa))
+
+aa |> pander::pander(round = 3, caption = "Coverage (%) of each method at each concordance level.")
+```
+
+
+## Results
+
+The four confidence interval construction methods for the asymptotic coefficient showed comparable coverage across the entire set. Given that the F2 transformation was proposed only for two replicates per individual, while both the Fisher's and the Konishi-Gupta transformation were generalized for any number of consistent replicates across individuals, it is still an important finding that the F2 still held for eight replicates. The robust U-statistics approach failed to provide its nominal coverage in all four sets and performed only comparable with the asymptotic approach in the heavily skewed case. The bootstrap approaches, which resampled the asymptotic CCC estimate, were the second most computationally expensive and those that showed the largest failure rate with regards of the estimation, and even after a revision to include parallelized batching and better error handling, while the improvement was notable the issues still remained. The Bayesian approach was the most computationally expensive by a wide margin, and it requires a rather large number of iterations (and iterations to discard) in order to converge in a reasonable effective sample size but showed some of the best performance (only outperformed by the non-parametric bootstrap in specific cases) even when failing to reach its nominal value. The use of a MAP (Maximum a posteriori probability) estimate as a point estimate did not produce a larger bias than the asymptotic or U-statistics point estimate, and it had the second lowest failure rate with regards of estimation. A Bayesian Lognormal-Normal estimate was also implemented but it requires further testing, and the approach could then be extended to handle other distributions.
+
+Tables with the failure rates, mean skewness and average bias have been provided in the appendix.
+
+

@@ -1,0 +1,33 @@
+project:
+  type: book
+
+book:
+  title: "Thesis"
+  author: "Peón Pena, Gonzalo"
+  date: today
+  chapters:
+    - index.qmd
+    - 01_Background.qmd
+    - 02_Aims.qmd
+    - 02_Literature_review.qmd
+    - 03_Concordance.qmd
+    - 05_Sim.qmd
+    - 06_Case_Study1.qmd
+    - 07_Case_Study2.qmd
+    - 08_Limitations_Conclusions.qmd
+    - references.qmd
+  appendices: 
+    - sim_tables.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+  docx: default
+
+
+nocite: |
+  @*
